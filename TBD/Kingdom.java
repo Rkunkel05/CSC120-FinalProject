@@ -1,4 +1,5 @@
-abstract class DefaultAction {
+package TBD;
+public class Kingdom extends DefaultAction {
     public void setShop() {
         // creating a shop
     }

@@ -1,4 +1,5 @@
-public class Forest extends DefaultAction {
+package TBD;
+public class Tavern {
     public void setShop() {
         // creating a shop
     }

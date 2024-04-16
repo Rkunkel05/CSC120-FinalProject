@@ -1,4 +1,5 @@
-public class Tavern {
+package TBD;
+abstract class DefaultAction {
     public void setShop() {
         // creating a shop
     }

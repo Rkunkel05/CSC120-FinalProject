@@ -1,3 +1,4 @@
+package TBD;
 public class Village extends DefaultAction {
     public void setShop() {
         // creating a shop
