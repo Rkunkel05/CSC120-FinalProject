@@ -1,5 +1,4 @@
-import TBD.DefaultAction;
-
+package TBD;
 public class Ocean extends DefaultAction {
     public void setShop() {
         // creating a shop
