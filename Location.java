@@ -1,3 +1,5 @@
+// Basically creates different locations with a name, direction, and brief overview attached to them
+
 public class Location {
     public String direction;
     public String name;
