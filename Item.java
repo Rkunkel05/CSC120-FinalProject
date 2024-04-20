@@ -1,8 +1,6 @@
-public class Item {
+public class Item extends Base {
     
     public static Object item;
-    private String name;
-    private String description;
     private String action;
     
     /**
@@ -12,32 +10,17 @@ public class Item {
      * @param String a is the action
      */
     public Item(String n, String d, String a) {
-        this.name= n;
-        this.description = d;
+        super (n, d);
         this.action = a;
     }
 
     /**
-     * // Various getters
+     * // Getters
      */
-    public String getName() {
-        return this.name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
 
     public String getAction() {
         return this.action;
     }
-
-    /**
-     * // Nicely formats description of item
-     */
-    public String toString() {
-        return this.getClass().getCanonicalName() + " called " + this.name + ". " + this.description;
-       }
 
     public static void main(String[] args) {
         Item Waterbottle = new Item("Waterbottle", "It's something to drink from!", "Drinking... Refreshing!");

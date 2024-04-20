@@ -28,4 +28,11 @@ public class Base {
     public void setDescription(String description) {
         this.description = description;
     }
+
+     /**
+     * // Nicely formats description
+     */
+    public String toString() {
+        return this.getClass().getCanonicalName() + " called " + this.name + ". " + this.description;
+       }
 }
