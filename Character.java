@@ -3,21 +3,30 @@ public class Character{
   double size;
   int XCoord = 0;
   int YCoord = 0;
+  ArrayList<Item> itemsList;
+  
     public Character(){
-      ArrayList<String> itemsList;
-      
+      ArrayList<Item> itemsList;
     }
-   public void grab (String item){
-       this.itemsList.add(item);
-      System.out.println(" grabbed!");
-    }
-   public void drop (){
-    this.itemsList.remove(item);
-    System.out.println("Item dropped!");
-     return item;
+
+    public void grab(String itemName) {
+      if (itemsList.size() <= 9) {
+          System.out.println(itemName + " grabbed!");
+          itemsList.add(new Item(itemName, "", "", false));
+      } else {
+          throw new RuntimeException("Your inventory is full! Try dropping an item first.");
+      }
   }
 
- 
+   public void drop(String itemName) {
+    for (Item item : itemsList) {
+      if (item.getName().equals(itemName)) {
+          itemsList.remove(item);
+    }
+  }
+    throw new RuntimeException(itemName + " is not in your inventory!");
+  }
+
   void examine(String item){
     System.out.println("");
   }
@@ -37,6 +46,18 @@ public class Character{
           this.yCoord++;
     }
     return true;
+
+    // Brainstorming ideas for a potential travel method
+    public int travel(String direction) {
+        if (direction == "north") {
+            Character.setLocation(1000);
+        } else if (direction == "south") {
+            Character.setLocation(0100); 
+        } else if (direction == "west") {
+                Character.setLocation(0010);
+        } else if (direction == "east") {
+            Character.setLocation(0001); 
+    }
     
   }
   boolean fly(int x, int y){
@@ -63,11 +84,10 @@ public class Character{
     System.out.println("");
   }
   public void printInventory(){
-    
-    for (String item : this.itemsList)
+    for (String item : this.itemsList);
   }
   public static void main(String[] args) {
-     Character character = new Character;
+     Character character = new Character();
       System.out.println(character);
  
       // public Character(
