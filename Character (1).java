@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Character implements Contract{
+public class Character{
   double size;
   int XCoord = 0;
   int YCoord = 0;
