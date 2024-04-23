@@ -20,7 +20,6 @@ public class Base {
     }
 
     // Setters
-
     public void setName(String name) {
         this.name = name;
     }

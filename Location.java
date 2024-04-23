@@ -8,6 +8,8 @@ public class Location extends Base {
 
         // Constructor
         // Logic w/ the ints for each direction is that the game can check if its a 1 or 0 to see if you can go that way to get there?
+        // Logic w/ ints for each direction is that if the player inputs a certain direction ex. "East" the game checks to see their current coordinates + adds 1 to respective space to signify being East. When they leave that direction, it subtracts 1 so they are at (0,0,0,0) by default
+        // Maybe we update location to just be 0000, then 0010 for west, etc.?
         public Location(String Name, String Description, int n, int s, int w, int e, boolean hasTrading) {
             super (Name, Description);
             this.north = n;
@@ -51,12 +53,8 @@ public class Location extends Base {
             this.east = e;
         }
 
-        public void setw(int w) {
+        public void setW(int w) {
             this.west = w;
-        }
-
-        public void setTrading(boolean hasTrading) {
-            this.hasTrading = hasTrading;
         }
 
         public static void main(String[] args) {
@@ -66,4 +64,16 @@ public class Location extends Base {
             Location Ocean = new Location("Ocean", "[info about ocean]", 0,1,0,0, false);
         }
 }
+
+// Brainstorming ideas for a potential travel method
+    // public int travel(String direction) {
+    //     if (direction == "north") {
+    //         Player.setCoordinates(1000);
+    //     } else if (direction == "south") {
+    //         Player.setCoordinates(0100); 
+    //     } else if (direction == "west") {
+    //             Player.setCoordinates(0010);
+    //     } else (direction == "east") {
+    //         Player.setCoordinates(0001); 
+    // }
 
