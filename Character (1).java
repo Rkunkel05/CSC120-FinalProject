@@ -29,11 +29,11 @@ public class Character implements Contract{
     System.out.println("" + direction);
     //store direction, move you to a place
     switch (direction.toLowerCase){
-      case "north"
-          this.yCoord++
-        case "north"
-          this.yCoord++
-        case "north"
+      case "north";
+          this.yCoord++;
+        case "north";
+          this.yCoord++;
+        case "north";
           this.yCoord++;
     }
     return true;
