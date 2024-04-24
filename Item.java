@@ -24,6 +24,10 @@ public class Item extends Base {
         return this.action;
     }
 
+    public boolean getSpecialItem() {
+        return this.specialItem;
+    }
+
     public static void main(String[] args) {
         Item Waterbottle = new Item("Waterbottle", "It's something to drink from!", "Drinking... Refreshing!", false);
         Item Sword = new Item("Sword", "It's dangerous to go alone. Take this!", "Swish!", false);
