@@ -5,10 +5,13 @@ public class Location extends Base {
         private boolean hasTrading;
         private int location;
 
-        // Constructor
-        // Logic w/ the ints for each direction is that the game can check if its a 1 or 0 to see if you can go that way to get there?
-        // Logic w/ ints for each direction is that if the player inputs a certain direction ex. "East" the game checks to see their current coordinates + adds 1 to respective space to signify being East. When they leave that direction, it subtracts 1 so they are at (0,0,0,0) by default
-        // Maybe we update location to just be 0000, then 0010 for west, etc.?
+        /**
+         * @param Name defines the name of the location
+         * @param Description defines a description for the location
+         * @param location defines what direction the location is in
+         * @param hasTrading indicates whether or not you can trade at this location
+         * Constructor 
+         */
         public Location(String Name, String Description, int location, boolean hasTrading) {
             super (Name, Description);
             this.location = location;

@@ -1,2 +1,6 @@
-Look around: Examine your surroundings
+Enter (location): Enter a location
 Examine (object): Study an object
+Help: Print a menu with all available commands
+Look around: Examine your surroundings
+Sell: Sell items
+Quit: Exit the game 

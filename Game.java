@@ -13,11 +13,11 @@ public class Game {
     public void gameCreation() {
         // Creating a map and adding locations to it, initilizing NPCs, etc. 
         this.map = new ArrayList < Location > ();
-        map.add(new Location("Kingdom", "[info about kingdom]", 0010, true));
-        map.add(new Location("Village", "[info about village]", 0001, true));
-        map.add(new Location("Forest", "[info about forest]", 1000, true));
-        map.add(new Location("Ocean", "[info about ocean]", 0100, false));
-        map.add(new Location("Tavern", "[info about tavern]", 0000, false));
+        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals.", 0010, true));
+        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true));
+        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. It would be easy to get lost here if you went off the pathway… Who knows what creatures await here…!", 1000, true));
+        map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
+        map.add(new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile. ", 0000, false));
     }
 
 
@@ -37,68 +37,77 @@ public class Game {
             }
             // Tidy up
             fileReader.close();
-        
-            } catch (FileNotFoundException e) { 
+
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    System.out.println("*********\n");
+        System.out.println("*********\n");
     }
 
     // game loop
     public static void main(String[] args) {
-        // Initializing the game 
-        Game game = new Game();
-        game.gameCreation();
-        System.out.println(game.map);
-        Character Player = new Character();
-        // Initializing the NPCs
-        // Character Trish = new Character();
+            // Initializing the game 
+            Game game = new Game();
+            game.gameCreation();
+            Character Player = new Character();
+            String currentLocationName = Player.getLocation();
+            Location currentLocation = null;
 
-        System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
-        System.out.println("What would you like to do? (for guidance, enter HELP)");
+            System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
+            System.out.println("What would you like to do? (for guidance, enter HELP)");
 
-        do {
-            Scanner userInput = new Scanner(System.in);
-            String userChoice = userInput.nextLine().toLowerCase();
-            // Checks if user wants to enter a building
-            if (userChoice.contains("enter")) {
-                String currentLocationName = Player.getLocation();
-                System.out.println("You enter the " + currentLocationName);
-            } else if (userChoice.contains("help")) {
-                game.showOptions();
-            // checks if user wants to examine a location
-            } else if (userChoice.contains("look") || userChoice.contains("around")) {
-                String currentLocationName = Player.getLocation();
-                String description = "";
-                for (Location location: game.map) {
-                    description = location.getDescription();
-                    if (location.getName().equalsIgnoreCase(currentLocationName)) {
-                        System.out.println("You are at the " + currentLocationName+ ". " + description);
-                        break;
+            do {
+                Scanner userInput = new Scanner(System.in);
+                String userChoice = userInput.nextLine().toLowerCase();
+        
+                // Checks if user wants to enter a building
+                if (userChoice.contains("enter")) {
+                    System.out.println("You enter the " + currentLocationName);
+                } else if (userChoice.contains("help")) {
+                    game.showOptions();
+        
+                    // Checks if user wants to examine a location
+                } else if (userChoice.contains("look") || userChoice.contains("around")) {
+                    String description = "";
+                    for (Location location: game.map) {
+                        description = location.getDescription();
+                        if (location.getName().equalsIgnoreCase(currentLocationName)) {
+                            System.out.println("You are at the " + currentLocationName + ". " + description);
+                            break;
+                        }
                     }
+        
+                    // Checks if user wants to sell at a location 
+                } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
+                    if (currentLocation != null && currentLocation.hasTrading()) {
+                        // code for trading idrk
+                    } else {
+                        System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
+                    }
+                    
+                    // Quit game
+                } else if (userChoice.equals("quit")) {
+                    System.out.println("Are you sure you want to quit? (y/n)");
+                    Scanner confirmInput = new Scanner(System.in);
+                    String confirmChoice = confirmInput.nextLine().toLowerCase();
+                    if (confirmChoice.equals("y") || confirmChoice.equals("yes")) {
+                        System.out.println("Farewell traveler!");
+                        stillPlaying = false;
+                        userInput.close();
+                        confirmInput.close();
+                    }
+                    else {
+                        System.out.println("Returning to the game...");
+                    }
+                } else {
+                    System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
+                    stillPlaying = true;
                 }
-            } else if (userChoice.equals("quit") || userChoice.equals("leave")) {
-                System.out.println("Are you sure you want to quit? (y/n)");
-                Scanner confirmInput = new Scanner(System.in);
-                String confirmChoice = confirmInput.nextLine().toLowerCase();
-                if (confirmChoice.equals("y") || confirmChoice.equals("yes")) {
-                    System.out.println("Farewell traveler!");
-                    stillPlaying = false;
-                    userInput.close();
-                    confirmInput.close();
-                }
-            } else {
-                System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
-            }
-        } while (stillPlaying);
+            } while (stillPlaying);
+        }
     }
-}
-            // [where to go w/ code from here!]
-            // start text sequence w/ trish 
-            // chosing what direction to go in 
-            // exploring, trading, talking, give away key item x4
-            // end of game --> whoever you got the most stats with = besties wahoo! (:
+        
 
 
 
