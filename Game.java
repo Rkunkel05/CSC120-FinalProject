@@ -1,4 +1,6 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Game {
 
@@ -23,11 +25,24 @@ public class Game {
      * Displays all available actions 
      */
     public void showOptions() {
-        System.out.println("\n *********");
+        System.out.println("\n*********");
         System.out.println("GAME OPTIONS");
-        // Maybe have it read from a text file with all available command options 
-        System.out.println();
-
+        try {
+            File myFile = new File("GameOptions.txt");
+            Scanner fileReader = new Scanner(myFile);
+            // Loop until we run out of lines
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                System.out.println(" + " + data);
+            }
+            // Tidy up
+            fileReader.close();
+        
+            } catch (FileNotFoundException e) { 
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    System.out.println("*********\n");
     }
 
     // game loop
@@ -39,11 +54,9 @@ public class Game {
         Character Player = new Character();
         // Initializing the NPCs
         // Character Trish = new Character();
-        // // Creating the player character
-        // Character Player = new Character();
 
         System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
-        System.out.println("What would you like to do? (for guidance, enter [options])");
+        System.out.println("What would you like to do? (for guidance, enter HELP)");
 
         do {
             Scanner userInput = new Scanner(System.in);
@@ -52,10 +65,10 @@ public class Game {
             if (userChoice.contains("enter")) {
                 String currentLocationName = Player.getLocation();
                 System.out.println("You enter the " + currentLocationName);
-            } else if (userChoice.contains("options")) {
+            } else if (userChoice.contains("help")) {
                 game.showOptions();
             // checks if user wants to examine a location
-            } else if (userChoice.contains("examine") || userChoice.contains("around")) {
+            } else if (userChoice.contains("look") || userChoice.contains("around")) {
                 String currentLocationName = Player.getLocation();
                 String description = "";
                 for (Location location: game.map) {
@@ -76,7 +89,7 @@ public class Game {
                     confirmInput.close();
                 }
             } else {
-                System.out.println("Command not recognized. Please try again.");
+                System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
             }
         } while (stillPlaying);
     }
