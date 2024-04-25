@@ -3,4 +3,5 @@ Examine (object): Study an object
 Help: Print a menu with all available commands
 Look around: Examine your surroundings
 Sell: Sell items
+Travel (direction): Move in a certain direction
 Quit: Exit the game 

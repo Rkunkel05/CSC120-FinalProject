@@ -86,24 +86,21 @@ public class Character {
      * @param direction is the direction the player wants to travel in
      * Updates the character's location based on the given direction
      */
-    public void travel(String direction) {
-        switch (direction.toLowerCase()) {
-            case "north":
-                this.location += 1000;
-                break;
-            case "south":
-                this.location -= 1000;
-                break;
-            case "east":
-                this.location += 1;
-                break;
-            case "west":
-                this.location -= 1;
-                break;
-            default:
-                System.out.println("Invalid direction!");
+    public void travel(String userChoice) {
+        if (userChoice.contains("north")) {
+          this.location += 1000;
+        } else if (userChoice.contains("south")) {
+          this.location -= 1000;
+        } else if (userChoice.contains("east")) {
+          this.location += 1;
+        } else if (userChoice.contains("west")) {
+          this.location -= 1;
+        } else {
+          System.out.println("Invalid direction!");
         }
-    }
+        System.out.println("You are now at the " + this.getLocation());
+      }
+    
 
     /**
      * Prints the contents of the inventory

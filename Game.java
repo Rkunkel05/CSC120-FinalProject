@@ -67,7 +67,7 @@ public class Game {
                 } else if (userChoice.contains("help")) {
                     game.showOptions();
         
-                    // Checks if user wants to examine a location
+                 // Checks if user wants to examine a location
                 } else if (userChoice.contains("look") || userChoice.contains("around")) {
                     String description = "";
                     for (Location location: game.map) {
@@ -78,7 +78,7 @@ public class Game {
                         }
                     }
         
-                    // Checks if user wants to sell at a location 
+                // Checks if user wants to sell at a location 
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
                     if (currentLocation != null && currentLocation.hasTrading()) {
                         // code for trading idrk
@@ -86,7 +86,7 @@ public class Game {
                         System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
                     }
                     
-                    // Quit game
+                // Quit game
                 } else if (userChoice.equals("quit")) {
                     System.out.println("Are you sure you want to quit? (y/n)");
                     Scanner confirmInput = new Scanner(System.in);
@@ -100,7 +100,14 @@ public class Game {
                     else {
                         System.out.println("Returning to the game...");
                     }
-                } else {
+                } 
+
+                // Checks if user wants to travel in a certain direction
+                else if (userChoice.contains("travel") || userChoice.contains("go")) {
+                    Player.travel(userChoice);
+        
+                // Case if the user puts in something the game does not understand
+                } else {    
                     System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
                     stillPlaying = true;
                 }
