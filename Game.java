@@ -79,9 +79,10 @@ public class Game {
                     }
         
                 // Checks if user wants to sell at a location 
+                // Currently having a problem where it does not let you trade regardless of whether or not the location hasTrading = true
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
                     if (currentLocation != null && currentLocation.hasTrading()) {
-                        // code for trading idrk
+                        System.out.println("What would you like to trade?");
                     } else {
                         System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
                     }

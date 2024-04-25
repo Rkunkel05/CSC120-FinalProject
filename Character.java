@@ -88,13 +88,13 @@ public class Character {
      */
     public void travel(String userChoice) {
         if (userChoice.contains("north")) {
-          this.location += 1000;
+          this.location = 1000;
         } else if (userChoice.contains("south")) {
-          this.location -= 1000;
+          this.location = 01000;
         } else if (userChoice.contains("east")) {
-          this.location += 1;
+          this.location = 0010;
         } else if (userChoice.contains("west")) {
-          this.location -= 1;
+          this.location = 0001;
         } else {
           System.out.println("Invalid direction!");
         }
