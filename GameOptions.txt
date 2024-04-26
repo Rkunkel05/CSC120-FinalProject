@@ -1,7 +1,7 @@
-Enter (location): Enter a location
 Examine (object): Study an object
 Help: Print a menu with all available commands
 Look around: Examine your surroundings
 Sell: Sell items
+Talk to (character): Talk with a character
 Travel (direction): Move in a certain direction
 Quit: Exit the game 

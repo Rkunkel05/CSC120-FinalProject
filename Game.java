@@ -4,8 +4,10 @@ import java.io.FileNotFoundException;
 
 public class Game {
 
-    private ArrayList < Location > map;
+    public static ArrayList < Location > map;
     static boolean stillPlaying = true;
+
+    
 
     /**
      * Constructor for map
@@ -17,7 +19,8 @@ public class Game {
         map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true));
         map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. It would be easy to get lost here if you went off the pathway… Who knows what creatures await here…!", 1000, true));
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
-        map.add(new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile. ", 0000, false));
+        Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'. ", 0000, false);
+        map.add(tavern);
     }
 
 
@@ -60,11 +63,9 @@ public class Game {
             do {
                 Scanner userInput = new Scanner(System.in);
                 String userChoice = userInput.nextLine().toLowerCase();
-        
-                // Checks if user wants to enter a building
-                if (userChoice.contains("enter")) {
-                    System.out.println("You enter the " + currentLocationName);
-                } else if (userChoice.contains("help")) {
+                          
+                // Checks if user wants the help menu
+                if (userChoice.contains("help")) {
                     game.showOptions();
         
                  // Checks if user wants to examine a location
@@ -79,10 +80,21 @@ public class Game {
                     }
         
                 // Checks if user wants to sell at a location 
-                // Currently having a problem where it does not let you trade regardless of whether or not the location hasTrading = true
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
-                    if (currentLocation != null && currentLocation.hasTrading()) {
-                        System.out.println("What would you like to trade?");
+                    if (currentLocation != null) {
+                        System.out.println("Current locationis not null");
+                        System.out.println(currentLocationName);;
+                    } if (currentLocation.hasTrading()) {
+                        System.out.println("What would you like to trade?"); 
+                        for (Item item : Player.itemsList) { 
+                            if (item.getsellableItem() == true) {
+                                System.out.println("+ " + item);
+                            } 
+                        String sellingItem = userInput.nextLine().toLowerCase();
+                        System.out.println("Sold!");
+                        Player.itemsList.remove(sellingItem);
+                        System.out.println("[here i would tell you how much of a profit you made]");
+                        }
                     } else {
                         System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
                     }
@@ -105,17 +117,19 @@ public class Game {
 
                 // Checks if user wants to travel in a certain direction
                 else if (userChoice.contains("travel") || userChoice.contains("go")) {
-                    Player.travel(userChoice);
+                    currentLocation = Player.travel(userChoice);
         
-                // Case if the user puts in something the game does not understand
+                // Case if the user wants to talk with an NPC
+                } else if (userChoice.contains("talk")) {
+                    // dialogue();
+                    System.out.println("dialogue() would run here");
+                
+                 // Case if the user puts in something the game does not understand
                 } else {    
                     System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
                     stillPlaying = true;
                 }
             } while (stillPlaying);
         }
-    }
-        
-
 
 

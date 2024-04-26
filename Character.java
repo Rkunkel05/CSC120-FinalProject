@@ -2,13 +2,13 @@ import java.util.ArrayList;
 public class Character {
     double size;
     int location;
-    ArrayList < Item > itemsList;
+    ArrayList<Item> itemsList;
 
     /**
      * Constructor for character
      */
     public Character() {
-        ArrayList < Item > itemsList;
+        this.itemsList = new ArrayList<>();
         this.location = 0000;
     }
 
@@ -36,7 +36,8 @@ public class Character {
     public void grab(String itemName) {
         if (itemsList.size() <= 9) {
             System.out.println(itemName + " grabbed!");
-            itemsList.add(new Item(itemName, "", "", false));
+            // Figure out a better way to grab items - If it's questItem we want it to be flagged as such and not just as false.... womp womp
+            itemsList.add(new Item(itemName, "", "", false, false));
         } else {
             throw new RuntimeException("Your inventory is full! Try dropping an item first.");
         }
@@ -86,20 +87,32 @@ public class Character {
      * @param direction is the direction the player wants to travel in
      * Updates the character's location based on the given direction
      */
-    public void travel(String userChoice) {
-        if (userChoice.contains("north")) {
-          this.location = 1000;
-        } else if (userChoice.contains("south")) {
-          this.location = 01000;
-        } else if (userChoice.contains("east")) {
-          this.location = 0010;
-        } else if (userChoice.contains("west")) {
-          this.location = 0001;
-        } else {
-          System.out.println("Invalid direction!");
-        }
-        System.out.println("You are now at the " + this.getLocation());
-      }
+    public Location travel(String userChoice) {
+      Location newLocation = null;
+    if (userChoice.contains("north")) {
+        this.location = 1000;
+    } else if (userChoice.contains("south")) {
+        this.location = 0100;
+    } else if (userChoice.contains("east")) {
+        this.location = 0010;
+    } else if (userChoice.contains("west")) {
+        this.location = 0001;
+    } else {
+        System.out.println("Invalid direction!");
+        return null; // Return null for invalid direction
+    }
+    System.out.println("You are now at the " + this.getLocation());
+    
+    // Find the new location in the game map
+    for (Location location : Game.map) {
+        if (location.location() == this.location) {
+            newLocation = location;
+            break;
+        } 
+    }
+    return newLocation; // Return the new location
+}
+    
     
 
     /**

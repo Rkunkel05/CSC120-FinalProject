@@ -2,6 +2,7 @@ public class Item extends Base {
 
     private String action;
     private boolean specialItem;
+    private boolean sellableItem;
     
     /**
      * // Constructor for Item
@@ -10,10 +11,11 @@ public class Item extends Base {
      * @param String a is the action
      * @param boolean specialItem represents if the item goes to a specific NPC
      */
-    public Item(String n, String d, String a, boolean specialItem) {
+    public Item(String n, String d, String a, boolean questItem, boolean sellableItem) {
         super (n, d);
         this.action = a;
-        this.specialItem = specialItem;
+        this.specialItem = questItem;
+        this.sellableItem = sellableItem;
     }
 
     /**
@@ -28,15 +30,15 @@ public class Item extends Base {
         return this.specialItem;
     }
 
+    public boolean getsellableItem() {
+        return this.sellableItem;
+    }
+
     public static void main(String[] args) {
-        Item Waterbottle = new Item("Waterbottle", "It's something to drink from!", "Drinking... Refreshing!", false);
-        Item Sword = new Item("Sword", "It's dangerous to go alone. Take this!", "Swish!", false);
+        Item Waterbottle = new Item("Waterbottle", "It's something to drink from!", "Drinking... Refreshing!", false, false);
+        Item Sword = new Item("Sword", "It's dangerous to go alone. Take this!", "Swish!", false, false);
         System.out.println(Waterbottle);
         System.out.println(Sword);
     }
-
-    // Somehow increases skills in player class
-    // Ex. Picking up a sword gives +2 attack 
-    // Ex. Using a certain potion gives +2 of an effect 
     
 }

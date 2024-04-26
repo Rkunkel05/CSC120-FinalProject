@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 class Dialogue {
 
+  public void dialogue() {
+
+  }
   public static void main(String[] arguments) {
     ArrayList<String> transcript = new ArrayList<String>();
    // System.out.print(file:welcomeMessage);
@@ -32,3 +35,33 @@ class Dialogue {
     System.out.println("Goodbye.");
   }
 }
+
+
+// for (Character character : NPCs) {
+//   if (userChoice.contains(character.getName())) {
+//       if (currentLocationName == character.getLocation()) {
+//           try {
+//               // Print dialogue for the specific NPC
+//               File npcDialogue = new File("Dialogue.txt");
+//               Scanner fileReader = new Scanner(npcDialogue);
+//               // Loop until we run out of lines
+//               while (fileReader.hasNextLine()) {
+//                   String data = fileReader.nextLine();
+//                   if String data.contains(character.getName()) {
+//                       System.out.println(" + " + data);
+//                   }
+//               }
+//               // Tidy up
+//               fileReader.close();
+  
+//           } catch (FileNotFoundException e) {
+//               System.out.println("An error occurred.");
+//               e.printStackTrace();
+//           }  
+//   } else {
+//       System.out.println("That character is not in the same location as you are!");
+//   } 
+//   } else {
+//       System.out.println("That character does not exist!");
+// }
+// }

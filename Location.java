@@ -1,6 +1,8 @@
 // Basically creates different locations with a name, direction, and brief overview attached to them
 // has[blank] to check if an action can be completed (ex. hasTrading, etc. )
 
+import java.util.ArrayList;
+
 public class Location extends Base {
         private boolean hasTrading;
         private int location;
@@ -35,18 +37,12 @@ public class Location extends Base {
             this.location = location;
         }
 
-
-        // 0000 = Original point
-        // 1000 = North
-        // 01000 = South
-        // 0010 = East
-        // 0001 = West
         public static void main(String[] args) {
-            // Location Tavern = new Location("Tavern", "[info about tavern]", 0000, false);
-            // Location Kingdom = new Location("Kingdom","[info about kingdom]", 0001, true);
-            // Location Village = new Location("Village", "[info about village]",0010, true);
-            // Location Forest = new Location("Forest", "[info about forest]", 1000, true);
-            // Location Ocean = new Location("Ocean", "[info about ocean]", 0100, false);
+            Location Kingdom = new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals.", 0010, true);
+            Location Village = new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true);
+            Location Forest = new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. It would be easy to get lost here if you went off the pathway… Who knows what creatures await here…!", 1000, true);
+            Location Tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'. ", 0000, false);
+            Location Ocean = new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false);
         }
-}
+    }
 
