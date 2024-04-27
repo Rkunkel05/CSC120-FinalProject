@@ -7,8 +7,6 @@ public class Game {
     public static ArrayList < Location > map;
     static boolean stillPlaying = true;
 
-    
-
     /**
      * Constructor for map
      */
@@ -57,6 +55,13 @@ public class Game {
             String currentLocationName = Player.getLocation();
             Location currentLocation = null;
 
+            for (Location location : game.map) {
+                if (location.getName().equalsIgnoreCase("Tavern")) {
+                    currentLocation = location;
+                    break;
+                }
+            }
+
             System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
             System.out.println("What would you like to do? (for guidance, enter HELP)");
 
@@ -72,8 +77,8 @@ public class Game {
                 } else if (userChoice.contains("look") || userChoice.contains("around")) {
                     String description = "";
                     for (Location location: game.map) {
-                        description = location.getDescription();
                         if (location.getName().equalsIgnoreCase(currentLocationName)) {
+                            description = location.getDescription();
                             System.out.println("You are at the " + currentLocationName + ". " + description);
                             break;
                         }
@@ -81,19 +86,33 @@ public class Game {
         
                 // Checks if user wants to sell at a location 
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
-                    if (currentLocation != null) {
-                        System.out.println("Current locationis not null");
-                        System.out.println(currentLocationName);;
-                    } if (currentLocation.hasTrading()) {
+                    if (currentLocation.hasTrading()) {
                         System.out.println("What would you like to trade?"); 
+                        System.out.println("\n*********");
+                        System.out.println("ITEMS FOR SALE: ");
+                        boolean itemSold = false; 
                         for (Item item : Player.itemsList) { 
-                            if (item.getsellableItem() == true) {
+                            if (item.getsellableItem()) {
                                 System.out.println("+ " + item);
-                            } 
-                        String sellingItem = userInput.nextLine().toLowerCase();
-                        System.out.println("Sold!");
-                        Player.itemsList.remove(sellingItem);
-                        System.out.println("[here i would tell you how much of a profit you made]");
+                            }
+                        }
+                        System.out.println("*********\n");
+                        if (Player.itemsList.isEmpty()) {
+                            System.out.println("You have no items to sell.");
+                        } else {
+
+                            String sellingItem = userInput.nextLine().toLowerCase();
+                            if (Player.itemsList.contains(sellingItem)) {
+                                System.out.println("Sold!");
+                                Player.itemsList.remove(sellingItem);
+                                itemSold = true;
+                            } else {
+                                System.out.println("You don't have that item.");
+                            }
+                        }
+                        if (itemSold) {
+                            System.out.println("You made:  $" + "[insert however we're measuring profit]");
+                            System.out.println("Current balance: $");
                         }
                     } else {
                         System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
@@ -131,5 +150,6 @@ public class Game {
                 }
             } while (stillPlaying);
         }
+}
 
 

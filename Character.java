@@ -88,30 +88,37 @@ public class Character {
      * Updates the character's location based on the given direction
      */
     public Location travel(String userChoice) {
-      Location newLocation = null;
-    if (userChoice.contains("north")) {
-        this.location = 1000;
-    } else if (userChoice.contains("south")) {
-        this.location = 0100;
-    } else if (userChoice.contains("east")) {
-        this.location = 0010;
-    } else if (userChoice.contains("west")) {
-        this.location = 0001;
-    } else {
-        System.out.println("Invalid direction!");
-        return null; // Return null for invalid direction
+        if (userChoice.contains("north")) {
+            for (Location location : Game.map) {
+                if (location.location() == 1000) {
+                    System.out.println("You travel north.");
+                    return location;
+                }
+            }
+        } else if (userChoice.contains("south")) {
+            for (Location location : Game.map) {
+                if (location.location() == 0100) {
+                    System.out.println("You travel south.");
+                    return location;
+                }
+            }
+        } else if (userChoice.contains("east")) {
+            for (Location location : Game.map) {
+                if (location.location() == 0010) {
+                    System.out.println("You travel east.");
+                    return location;
+                }
+            }
+        } else if (userChoice.contains("west")) {
+            for (Location location : Game.map) {
+                if (location.location() == 0001) {
+                    System.out.println("You travel west.");
+                    return location;
+                }
+            }
+        }
+        return null;
     }
-    System.out.println("You are now at the " + this.getLocation());
-    
-    // Find the new location in the game map
-    for (Location location : Game.map) {
-        if (location.location() == this.location) {
-            newLocation = location;
-            break;
-        } 
-    }
-    return newLocation; // Return the new location
-}
     
     
 

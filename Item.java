@@ -33,12 +33,4 @@ public class Item extends Base {
     public boolean getsellableItem() {
         return this.sellableItem;
     }
-
-    public static void main(String[] args) {
-        Item Waterbottle = new Item("Waterbottle", "It's something to drink from!", "Drinking... Refreshing!", false, false);
-        Item Sword = new Item("Sword", "It's dangerous to go alone. Take this!", "Swish!", false, false);
-        System.out.println(Waterbottle);
-        System.out.println(Sword);
-    }
-    
 }
