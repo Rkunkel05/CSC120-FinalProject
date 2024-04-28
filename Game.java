@@ -78,8 +78,8 @@ public class Game {
                     String description = "";
                     for (Location location: game.map) {
                         if (location.getName().equalsIgnoreCase(currentLocationName)) {
-                            description = location.getDescription();
-                            System.out.println("You are at the " + currentLocationName + ". " + description);
+                            description = currentLocation.getDescription();
+                            System.out.println("You are at the " + location.getName() + ". " + description);
                             break;
                         }
                     }
@@ -137,10 +137,14 @@ public class Game {
                 // Checks if user wants to travel in a certain direction
                 else if (userChoice.contains("travel") || userChoice.contains("go")) {
                     currentLocation = Player.travel(userChoice);
+                    if (currentLocation != null) {
+                        currentLocationName = currentLocation.getName();
+                        System.out.println("You are now at the " + currentLocationName);
+                    }
         
                 // Case if the user wants to talk with an NPC
                 } else if (userChoice.contains("talk")) {
-                    // dialogue();
+                    // Call on dialogue.java class to run code 
                     System.out.println("dialogue() would run here");
                 
                  // Case if the user puts in something the game does not understand
