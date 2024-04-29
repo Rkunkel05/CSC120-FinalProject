@@ -69,11 +69,11 @@ public class Game {
                 Scanner userInput = new Scanner(System.in);
                 String userChoice = userInput.nextLine().toLowerCase();
                           
-                // Checks if user wants the help menu
+                // Checks if player wants the help menu
                 if (userChoice.contains("help")) {
                     game.showOptions();
         
-                 // Checks if user wants to examine a location
+                 // Checks if player wants to examine a location
                 } else if (userChoice.contains("look") || userChoice.contains("around")) {
                     String description = "";
                     for (Location location: game.map) {
@@ -84,7 +84,7 @@ public class Game {
                         }
                     }
         
-                // Checks if user wants to sell at a location 
+                // Checks if player wants to sell at a location 
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
                     if (currentLocation.hasTrading()) {
                         System.out.println("What would you like to trade?"); 
@@ -134,7 +134,7 @@ public class Game {
                     }
                 } 
 
-                // Checks if user wants to travel in a certain direction
+                // Checks if player wants to travel in a certain direction
                 else if (userChoice.contains("travel") || userChoice.contains("go")) {
                     currentLocation = Player.travel(userChoice);
                     if (currentLocation != null) {
@@ -142,16 +142,62 @@ public class Game {
                         System.out.println("You are now at the " + currentLocationName);
                     }
         
-                // Case if the user wants to talk with an NPC
+                // Case if the player wants to talk with an NPC
                 } else if (userChoice.contains("talk")) {
                     // Call on dialogue.java class to run code 
                     System.out.println("dialogue() would run here");
                 
-                 // Case if the user puts in something the game does not understand
-                } else {    
+                // Case if the player wants to look at an object
+                } else if (userChoice.contains("examine")) {
+                    System.out.println("What would you like to examine?");
+                    String examineItemName = userInput.nextLine().toLowerCase();
+                    boolean itemFound = false;
+                    for (Item item : Player.itemsList) {
+                        if (item.getName().equalsIgnoreCase(examineItemName)) {
+                            System.out.println(item.getDescription());
+                            itemFound = true;
+                            break;
+                        }
+                    }
+                    if (!itemFound) {
+                        System.out.println("You don't have that item in your inventory. Try picking it up first to examine it!");
+                    }
+
+                // Case if the player wants to pick up an item
+                // I feel like the logic is flawed here... Do we maybe need a list of all items in the world...?
+                } else if (userChoice.contains("grab")) {
+                    System.out.println("What would you like to grab?");
+                    String grabItemName = userInput.nextLine().toLowerCase();
+                    for (Item item : Player.itemsList) {
+                        if (item.getName().equalsIgnoreCase(grabItemName)) {
+                            Player.grab(item.getName());
+                            break;
+                        }
+                    }
+                
+                // Case if the player wants to drop an item
+                } else if (userChoice.contains("drop")) {
+                    System.out.println("What would you like to drop?");
+                    String dropItemName = userInput.nextLine().toLowerCase();
+                    boolean itemFound = false;
+                    for (Item item : Player.itemsList) {
+                        if (item.getName().equalsIgnoreCase(dropItemName)) {
+                            Player.drop(item.getName());
+                            itemFound = true;
+                            break;
+                        }
+                    }
+                    if (!itemFound) {
+                        System.out.println(dropItemName + " is not in your inventory!");
+                    }
+
+
+                // Case if the player puts in something the game does not understand
+            }   else {    
                     System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
                     stillPlaying = true;
                 }
+                
             } while (stillPlaying);
         }
 }

@@ -1,5 +1,7 @@
 Examine (object): Study an object
+Drop: Remove an item
 Help: Print a menu with all available commands
+Grab: Pick up an item
 Look around: Examine your surroundings
 Sell: Sell items
 Talk to (character): Talk with a character
