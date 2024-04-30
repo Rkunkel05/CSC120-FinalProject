@@ -6,7 +6,7 @@ public class Game {
 
     public static ArrayList < Location > map;
     static boolean stillPlaying = true;
-    public static ArrayList < NPC > NPCs;
+    public static ArrayList<NPC> NPCs;
 
     /**
      * Constructor for map
@@ -20,6 +20,7 @@ public class Game {
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
         Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'. ", 0000, false);
         map.add(tavern);
+        Game.NPCs = new ArrayList<NPC>();
     }
 
 
@@ -49,7 +50,7 @@ public class Game {
 
     // game loop
     @SuppressWarnings("unlikely-arg-type")
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
             // Initializing the game 
             Game game = new Game();
             game.gameCreation();
@@ -59,10 +60,10 @@ public class Game {
             Location currentLocation = null;
 
             // Creating NPCs
-            NPC Trish = new NPC(0000);
-            NPC fillerKingdom = new NPC(0010);
-            NPC fillerForest = new NPC(1000);
-            NPC fillerVillage = new NPC(0001);
+            NPC Trish = new NPC("Trish", 0000);
+            NPC fillerKingdom = new NPC("fillerKingdom", 0010);
+            NPC fillerForest = new NPC("fillerForest", 1000);
+            NPC fillerVillage = new NPC("fillerVillage", 0001);
 
             // Creating list of NPCs
             NPCs.add(Trish);
@@ -160,7 +161,7 @@ public class Game {
                 // Case if the player wants to talk with an NPC
                 } else if (userChoice.contains("talk")) {
                     // Call on dialogue.java class to run code 
-                    NPC.talkToUser();
+                    NPC.talkToUser(userChoice, Player);
                 
                 // Case if the player wants to look at an object
                 } else if (userChoice.contains("examine")) {

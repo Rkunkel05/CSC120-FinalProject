@@ -1,4 +1,3 @@
-Trish: 'Ello travelah! My name is Trish - like fish! - and welcome to my tavern. 
-Trish: Ah! You're brand new to this whole adventuring thing, aren't you? Tell me, are you a [D&D class options]?
-Trish: Delightful, travelah! Here, also take these Special items - they'll help you with making friends on your journey. 
-Trish: My lovely tavern is a perfect crossroad for travelors like you. I'd suggest exploring North, East, and West to find new friends! My challenge for you is to sell all of the Special items I gave you!
+Trish default: 'Ello travelah! My name is Trish - like fish! - and welcome to my tavern. 
+Trish default: Ah! It looks like you already have some Special items on you. Type "inventory" to view them, they're really quite lovely!
+Trish default: From here, I'd suggest exploring North, East, and West to find new friends! My challenge for you is to sell all of the Special items I gave you!
