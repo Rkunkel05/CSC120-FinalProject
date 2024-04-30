@@ -11,7 +11,8 @@ class NPC {
     if (userInput == )
   }
   public static String tradeObject(){
-    
+    //restock, inventory, new arrayList for this class
+    // inventory stores certain amount of things 
   }
   
   public static void main(String[] args){
