@@ -21,7 +21,6 @@ public class Item extends Base {
     /**
      * // Getters
      */
-
     public String getAction() {
         return this.action;
     }

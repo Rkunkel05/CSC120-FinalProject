@@ -126,7 +126,6 @@ public class Game {
                     }
         
                 // Checks if user wants to sell at a location 
-                    // Checks if user wants to sell at a location 
                 } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
                     if (currentLocation.hasTrading()) {
                         System.out.println("What would you like to trade?"); 

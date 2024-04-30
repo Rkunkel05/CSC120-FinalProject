@@ -1,5 +1,5 @@
-Examine (object): Study an object
-Drop: Remove an item
+Examine: Study an object
+Drop: Remove an item from inventory
 Help: Print a menu with all available commands
 Grab: Pick up an item
 Look around: Examine your surroundings

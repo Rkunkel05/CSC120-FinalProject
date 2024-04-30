@@ -23,7 +23,6 @@ class NPC {
     /*
      * Getters
      */
-
      public String getName() {
       return this.name;
      }

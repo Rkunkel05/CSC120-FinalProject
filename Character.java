@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 public class Character {
     double size;
     int location;
@@ -66,9 +67,11 @@ public class Character {
     public int getfriends(){
         return friends.size();
     }
+
     public double getWealth(){
         return wealth;
     }
+
     public double getTrades(){
         return trades;
     }
@@ -87,7 +90,9 @@ public class Character {
                         skill += 4;
                     }
                     itemsList.add(item);
-                    System.out.println(itemName + " grabbed!");
+                    if (item.getSpecialItem() == false) {
+                        System.out.println(itemName + " grabbed!");
+                    }
                     return;
                 } else {
                     System.out.println("Your inventory is full! Try dropping an item first.");
@@ -105,37 +110,23 @@ public class Character {
      * Checks if the item is in the inventory and removes it. 
      */
     public void drop(String itemName) {
-        for (Item item: itemsList) {
-            if (item.getName().equals(itemName)) {
-                itemsList.remove(item);
-                if (item.getName().equals("Sword")){
-                    skill -= 4;
-                    System.out.println("Your skill has decreased by 4 :(");
-                  }
-                  else if (item.getName().equals("Waterbottle")){
-                    System.out.println("");
-                  }
-                  else if (item.getName().equals("Helmet")){
-                      System.out.println("");
-                  }
-                  else if (item.getName().equals("")){
-                  System.out.println("");
-                  }
-                  else if (item.getName().equals("")){
-                  System.out.println("");
-                  }
-                  else if (item.getName().equals("")){
-                  System.out.println("");
-                  }
-                  else if (item.getName().equals("")){
-                  System.out.println("");
-                  }
-                  else if (item.getName().equals("")){
-                  System.out.println("");
-                  }
+        Iterator<Item> iterator = itemsList.iterator();
+        while (iterator.hasNext()) {
+        Item item = iterator.next();
+        if (item.getName().equalsIgnoreCase(itemName)) {
+            if (!item.getSpecialItem()) {
+                iterator.remove(); 
+                System.out.println(itemName + " dropped!");
+                return; 
+            } else {
+                // If the item is special, print an error message and return
+                System.out.println("You can't drop " + itemName + "!");
+                return;
             }
         }
-        throw new RuntimeException(itemName + " is not in your inventory!");
+    }
+        // If the item is not found in the inventory, print an error message
+        System.out.println(itemName + " is not in your inventory!");
     }
 
     /**
