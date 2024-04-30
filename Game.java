@@ -7,12 +7,13 @@ public class Game {
     public static ArrayList < Location > map;
     static boolean stillPlaying = true;
     public static ArrayList<NPC> NPCs;
+    public static ArrayList<Item> worldItems;
 
     /**
      * Constructor for map
      */
     public void gameCreation() {
-        // Creating a map and adding locations to it, initilizing NPCs, etc. 
+        // Creating a map and adding locations to it
         Game.map = new ArrayList < Location > ();
         map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals.", 0010, true));
         map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true));
@@ -20,7 +21,22 @@ public class Game {
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
         Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'. ", 0000, false);
         map.add(tavern);
+
+        // Creating a list of all NPCs
         Game.NPCs = new ArrayList<NPC>();
+
+        // Creating a list of all world items
+        Game.worldItems = new ArrayList<Item>();
+
+        // Creating items for the game
+        Item FishingRod = new Item("Enchanted Fishingrod", "The fishingrod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for a talented fisher!", "SWISH! Maybe you'll catch a big one!", true, false);
+        Item questItem2 = new Item("Quest Item 2", "[insert description]", "[insert action]", true, false);
+        Item questItem3 = new Item("Quest Item 3", "[insert description]", "[insert action]", true, false);
+        Item questItem4 = new Item("Quest Item 4", "[insert description]", "[insert action]", true, false);
+        worldItems.add(FishingRod);
+        worldItems.add(questItem2);
+        worldItems.add(questItem3);
+        worldItems.add(questItem4);
     }
 
 
@@ -57,6 +73,10 @@ public class Game {
             // Creating Player
             Character Player = new Character();
             String currentLocationName = Player.getLocation();
+            Player.grab("Enchanted Fishingrod");
+            Player.grab("questItem2");
+            Player.grab("questItem3");
+            Player.grab("questItem4");
             Location currentLocation = null;
 
             // Creating NPCs
@@ -209,8 +229,13 @@ public class Game {
                     }
 
 
+                // Case if the player wants to view their inventory
+                }  else if (userChoice.contains("inventory")) {
+                    Player.printInventory();
+                }
+                
                 // Case if the player puts in something the game does not understand
-            }   else {    
+                else {    
                     System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
                     stillPlaying = true;
                 }

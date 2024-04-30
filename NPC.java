@@ -28,48 +28,36 @@ class NPC {
       return this.name;
      }
 
-     public int getLocation() {
-      return this.location;
-     }
+     public String getLocation() {
+      if (this.location == (0000)) {
+          return "Tavern";
+      } else if (this.location == (1000)) {
+          return "Forest";
+      } else if (this.location == (0100)) {
+          return "Ocean";
+      } else if (this.location == (0010)) {
+          return "Village";
+      } else {
+          return "Kingdom";
+      }
+  }
 
     /**
-     * @param String userChoice 
-     * @return
+     * @param userChoice is the input from the player 
+     * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's default dialogue.
      */
-
-     // Failing check to see if userChoice contains certain key words
-     // Logic issue...? Would fight / trade deserve different dialogue options instead...? Feels strange to condense into one 
     public static void talkToUser(String userChoice, Character Player) throws FileNotFoundException {
       for (NPC NPC : Game.NPCs) {
-        System.out.println("Checking NPC: " + NPC.getName());
         String[] words = userChoice.split("\\s+");
         for (String word : words) {
-          System.out.println("Checking word: " + word);
           if (word.equalsIgnoreCase(NPC.getName())) {
-            System.out.println("NPC Found: " + NPC.getName());
             if (Player.getLocation().equals(NPC.getLocation())) {
-              System.out.println("Player and NPC are in the same location.");
               File npcDialogue = new File("Dialogue.txt");
               Scanner fileReader = new Scanner(npcDialogue);
               while (fileReader.hasNextLine()) {
                   String data = fileReader.nextLine();
-                  if (data.contains(NPC.getName())) {
-                    // checking if user wants to fight to print fight dialogue
-                      if (userChoice.contains("fight") && data.contains("fight: ")) {
-                          System.out.println("Contains mention of fight");
-                          System.out.println(data.substring(data.indexOf("fight: ") + "fight: ".length()));
-                          break;
-                    // checking if user wants to trade to print trade fialogue
-                      } else if (userChoice.contains("trade") && data.contains("trade: ")) {
-                        System.out.println("Contains mention of trade");
-                          System.out.println(data.substring(data.indexOf("trade: ") + "trade: ".length()));
-                          break;
-                    // checking if user just wants to talk and prints default dialogue 
-                      } else if (data.contains("default: ")) {
-                        System.out.println("Contains mention of default");
-                          System.out.println(data.substring(data.indexOf("default: ") + "default: ".length()));
-                          break;
-                      }
+                  if (data.contains(NPC.getName()) && data.contains("default:")) {
+                    System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("default: ") + "default: ".length()));
                   }
             }
             fileReader.close();
