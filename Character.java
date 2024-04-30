@@ -23,7 +23,7 @@ public class Character {
      * Constructor for character
      */
     public Character(String type) {
-        ArrayList <Item> itemsList = new ArrayList <>();
+        this.itemsList = new ArrayList <>();
         Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
         this.location = 0000;
         if (type == "merchant"){ 
@@ -78,41 +78,27 @@ public class Character {
      * Checks if inventory has space (10) and adds item to it. Otherwise throws error 
      */
     public void grab(String itemName) {
-        if (itemsList.size() <= 9) {
-            System.out.println(itemName + " grabbed!");
-            boolean itemAdd = itemsList.add();
-            //added as either string or item itself; unsure
-            if (itemName == "Sword"){
-              skill += 4;
-              System.out.println("Your skill has increased by 4!");
-            }
-            else if (itemName == "Waterbottle"){
-              System.out.println("");
-            }
-            else if (itemName == "Helmet"){
-                System.out.println("");
-            }
-            else if (itemName == ""){
-            System.out.println("");
-            }
-            else if (itemName == ""){
-                System.out.println("");
-            }
-            else if (itemName == ""){
-            System.out.println("");
-            }
-            else if (itemName == ""){
-                System.out.println("");
-            }
-            else if (itemName == ""){
-            System.out.println("");
-            }
+        for (Item item : Game.worldItems) {
+            if (item.getName().equals(itemName)) {
+                if (itemsList.size() <= 9) {
+                    if (item.getName().equals("Sword")) {
+                        skill += 4;
+                        itemsList.add(item);
+                    } else if (item.getName().equals("Waterbottle")) {
+                        itemsList.add(item);
+                    } else if (item.getName().equals("Helmet")) {
+                        itemsList.add(item);
+                    } else if (item.getName().equals("")) {
+                        itemsList.add(item);
+                    } else {
+                    System.out.println("Your inventory is full! Try dropping an item first.");
+                }
+            } 
         } else {
-            throw new RuntimeException("Your inventory is full! Try dropping an item first.");
+            System.out.println("That's not an item!");
         }
     }
-            
-
+    }
 
     /**
      * @param itemName is the item that is being dropped
