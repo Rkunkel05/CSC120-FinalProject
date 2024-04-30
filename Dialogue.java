@@ -8,7 +8,6 @@ class Dialogue {
   public static void main(String[] arguments) {
     ArrayList<String> transcript = new ArrayList<String>();
    // System.out.print(file:welcomeMessage);
-    // transcript.add("How many rounds?");
     Scanner input = new Scanner(System.in);
     int nRounds = input.nextInt();
     input.nextLine(); //clearing new line character
