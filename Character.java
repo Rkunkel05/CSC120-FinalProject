@@ -1,15 +1,49 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 public class Character {
     double size;
     int location;
-    ArrayList<Item> itemsList;
+    
+    String type;
+    int skill;
+    int armour;
+    int charisma;
+    double wealth;
+    int health;
+
+    private Hashtable <String, Integer> friends;
+    //way to store number of trades, either just an increasing int or an arraylist
+    int trades;
+
+    ArrayList <Item> itemsList;
+    int battlesWon;
+    int battlesLost;
 
     /**
      * Constructor for character
      */
-    public Character() {
-        this.itemsList = new ArrayList<>();
+    public Character(String type) {
+        ArrayList <Item> itemsList = new ArrayList <>();
+        Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
         this.location = 0000;
+        if (type == "merchant"){ 
+            skill = 3;
+            charisma = 5;
+            wealth = 13.00;
+            health = 10;
+        }
+        if (type == "warrior"){ 
+            skill = 5;
+            charisma = 3;
+            wealth = 13.00;
+            health = 10;
+        }
+        if (type == "friend"){ 
+            skill = 2;
+            charisma = 6;
+            wealth = 13.00;
+            health = 10;
+        }
     }
 
     /** 
@@ -29,21 +63,52 @@ public class Character {
         }
     }
 
+    public int getfriends(){
+        return friends.size();
+    }
+    public double getWealth(){
+        return wealth;
+    }
+    public double getTrades(){
+        return trades;
+    }
+
     /** 
      * @param itemName is the item that is being grabbed
      * Checks if inventory has space (10) and adds item to it. Otherwise throws error 
      */
     public void grab(String itemName) {
         if (itemsList.size() <= 9) {
-            if (!itemsList.contains(itemName)) {
-                System.out.println(itemName + " grabbed!");
-                // Figure out a better way to grab items - If it's questItem we want it to be flagged as such and not just as false.... womp womp
-                itemsList.add(new Item(itemName, "", "", false, false));
-            } else {
-                System.out.println("You already have this item!");
-            } 
+            System.out.println(itemName + " grabbed!");
+            boolean itemAdd = itemsList.add();
+            //added as either string or item itself; unsure
+            if (itemName == "Sword"){
+              skill += 4;
+              System.out.println("Your skill has increased by 4!");
+            }
+            else if (itemName == "Waterbottle"){
+              System.out.println("");
+            }
+            else if (itemName == "Helmet"){
+                System.out.println("");
+            }
+            else if (itemName == ""){
+            System.out.println("");
+            }
+            else if (itemName == ""){
+                System.out.println("");
+            }
+            else if (itemName == ""){
+            System.out.println("");
+            }
+            else if (itemName == ""){
+                System.out.println("");
+            }
+            else if (itemName == ""){
+            System.out.println("");
+            }
         } else {
-                throw new RuntimeException("Your inventory is full! Try dropping an item first.");
+            throw new RuntimeException("Your inventory is full! Try dropping an item first.");
         }
     }
             
@@ -57,6 +122,31 @@ public class Character {
         for (Item item: itemsList) {
             if (item.getName().equals(itemName)) {
                 itemsList.remove(item);
+                if (itemName == "Sword"){
+                    skill -= 4;
+                    System.out.println("Your skill has decreased by 4 :(");
+                  }
+                  else if (itemName == "Waterbottle"){
+                    System.out.println("");
+                  }
+                  else if (itemName == "Helmet"){
+                      System.out.println("");
+                  }
+                  else if (itemName == ""){
+                  System.out.println("");
+                  }
+                  else if (itemName == ""){
+                      System.out.println("");
+                  }
+                  else if (itemName == ""){
+                  System.out.println("");
+                  }
+                  else if (itemName == ""){
+                      System.out.println("");
+                  }
+                  else if (itemName == ""){
+                  System.out.println("");
+                  }
             }
         }
         throw new RuntimeException(itemName + " is not in your inventory!");
@@ -155,7 +245,7 @@ public class Character {
     }
 
     public static void main(String[] args) {
-        Character character = new Character();
+        Character character = new Character("merchant");
         System.out.println(character.getLocation());
         character.travel("north");
         System.out.println(character.getLocation());
