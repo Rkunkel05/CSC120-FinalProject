@@ -75,62 +75,62 @@ public class Character {
 
     /** 
      * @param itemName is the item that is being grabbed
-     * Checks if inventory has space (10) and adds item to it. Otherwise throws error 
+     * Checks if inventory has space (10) and adds item to it. 
      */
     public void grab(String itemName) {
+        boolean itemFound = false;
         for (Item item : Game.worldItems) {
-            if (item.getName().equals(itemName)) {
-                if (itemsList.size() <= 9) {
+            if (item.getName().equalsIgnoreCase(itemName.toLowerCase())) {
+                itemFound = true;
+                if (itemsList.size() < 11) {
                     if (item.getName().equals("Sword")) {
                         skill += 4;
-                        itemsList.add(item);
-                    } else if (item.getName().equals("Waterbottle")) {
-                        itemsList.add(item);
-                    } else if (item.getName().equals("Helmet")) {
-                        itemsList.add(item);
-                    } else if (item.getName().equals("")) {
-                        itemsList.add(item);
-                    } else {
+                    }
+                    itemsList.add(item);
+                    System.out.println(itemName + " grabbed!");
+                    return;
+                } else {
                     System.out.println("Your inventory is full! Try dropping an item first.");
+                    return;
                 }
-            } 
-        } else {
+            }
+        }
+        if (!itemFound) {
             System.out.println("That's not an item!");
         }
-    }
     }
 
     /**
      * @param itemName is the item that is being dropped
-     * Checks if the item is in the inventory and removes it. Otherwise throws error 
+     * Checks if the item is in the inventory and removes it. 
      */
     public void drop(String itemName) {
         for (Item item: itemsList) {
             if (item.getName().equals(itemName)) {
                 itemsList.remove(item);
-                if (itemName == "Sword"){
+                if (item.getName().equals("Sword")){
                     skill -= 4;
                     System.out.println("Your skill has decreased by 4 :(");
                   }
-                  else if (itemName == "Waterbottle"){
+                  else if (item.getName().equals("Waterbottle")){
                     System.out.println("");
                   }
-                  else if (itemName == "Helmet"){
+                  else if (item.getName().equals("Helmet")){
                       System.out.println("");
                   }
-                  else if (itemName == ""){
+                  else if (item.getName().equals("")){
                   System.out.println("");
                   }
-                  else if (itemName == ""){
-                      System.out.println("");
-                  }
-                  else if (itemName == ""){
+                  else if (item.getName().equals("")){
                   System.out.println("");
                   }
-                  else if (itemName == ""){
-                      System.out.println("");
+                  else if (item.getName().equals("")){
+                  System.out.println("");
                   }
-                  else if (itemName == ""){
+                  else if (item.getName().equals("")){
+                  System.out.println("");
+                  }
+                  else if (item.getName().equals("")){
                   System.out.println("");
                   }
             }

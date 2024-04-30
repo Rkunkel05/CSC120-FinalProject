@@ -29,7 +29,7 @@ public class Game {
         Game.worldItems = new ArrayList<Item>();
 
         // Creating items for the game
-        Item FishingRod = new Item("Enchanted Fishingrod", "The fishingrod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for a talented fisher!", "SWISH! Maybe you'll catch a big one!", true, false);
+        Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for a talented fisher!", "SWISH! Maybe you'll catch a big one!", true, false);
         Item questItem2 = new Item("Quest Item 2", "[insert description]", "[insert action]", true, false);
         Item questItem3 = new Item("Quest Item 3", "[insert description]", "[insert action]", true, false);
         Item questItem4 = new Item("Quest Item 4", "[insert description]", "[insert action]", true, false);
@@ -75,14 +75,13 @@ public class Game {
             Scanner typeInput = new Scanner(System.in);
             String characterType = typeInput.nextLine().toLowerCase();
             //need exception here to catch user error
-            typeInput.close();
             Character Player = new Character(characterType);
             
             String currentLocationName = Player.getLocation();
-            Player.grab("Enchanted Fishingrod");
-            Player.grab("questItem2");
-            Player.grab("questItem3");
-            Player.grab("questItem4");
+            Player.grab("Enchanted Fishing Rod");
+            Player.grab("Quest Item 2");
+            Player.grab("Quest Item 3");
+            Player.grab("Quest Item 4");
             Location currentLocation = null;
 
             // Creating NPCs
@@ -265,7 +264,9 @@ public class Game {
                 
 
             } while (stillPlaying);
+            typeInput.close();
         }
+        
 }
 
 
