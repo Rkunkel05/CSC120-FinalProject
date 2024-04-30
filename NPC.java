@@ -16,7 +16,7 @@ class NPC {
       this.location = location;
   }
 
-  public static String talkToUser(){
+  public static String haveConversation(){
     System.out.println("Hi! My name is" + name ". What's yours?");
     if (userInput == )
 
