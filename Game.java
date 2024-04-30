@@ -6,6 +6,7 @@ public class Game {
 
     public static ArrayList < Location > map;
     static boolean stillPlaying = true;
+    public static ArrayList < NPC > NPCs;
 
     /**
      * Constructor for map
@@ -52,9 +53,22 @@ public class Game {
             // Initializing the game 
             Game game = new Game();
             game.gameCreation();
+            // Creating Player
             Character Player = new Character();
             String currentLocationName = Player.getLocation();
             Location currentLocation = null;
+
+            // Creating NPCs
+            NPC Trish = new NPC(0000);
+            NPC fillerKingdom = new NPC(0010);
+            NPC fillerForest = new NPC(1000);
+            NPC fillerVillage = new NPC(0001);
+
+            // Creating list of NPCs
+            NPCs.add(Trish);
+            NPCs.add(fillerKingdom);
+            NPCs.add(fillerForest);
+            NPCs.add(fillerVillage);
 
             for (Location location : Game.map) {
                 if (location.getName().equalsIgnoreCase("Tavern")) {

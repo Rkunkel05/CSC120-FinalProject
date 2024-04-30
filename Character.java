@@ -35,13 +35,19 @@ public class Character {
      */
     public void grab(String itemName) {
         if (itemsList.size() <= 9) {
-            System.out.println(itemName + " grabbed!");
-            // Figure out a better way to grab items - If it's questItem we want it to be flagged as such and not just as false.... womp womp
-            itemsList.add(new Item(itemName, "", "", false, false));
+            if (!itemsList.contains(itemName)) {
+                System.out.println(itemName + " grabbed!");
+                // Figure out a better way to grab items - If it's questItem we want it to be flagged as such and not just as false.... womp womp
+                itemsList.add(new Item(itemName, "", "", false, false));
+            } else {
+                System.out.println("You already have this item!");
+            } 
         } else {
-            throw new RuntimeException("Your inventory is full! Try dropping an item first.");
+                throw new RuntimeException("Your inventory is full! Try dropping an item first.");
         }
     }
+            
+
 
     /**
      * @param itemName is the item that is being dropped
