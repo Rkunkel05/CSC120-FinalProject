@@ -116,6 +116,12 @@ public class Character {
                     return location;
                 }
             }
+        } else if (userChoice.contains("tavern"))
+        for (Location location : Game.map) {
+            if (location.location() == 0000) {
+                System.out.println("You enter the tavern.");
+                return location;
+            }
         }
         return null;
     }

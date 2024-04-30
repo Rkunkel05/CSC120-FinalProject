@@ -12,7 +12,7 @@ public class Game {
      */
     public void gameCreation() {
         // Creating a map and adding locations to it, initilizing NPCs, etc. 
-        this.map = new ArrayList < Location > ();
+        Game.map = new ArrayList < Location > ();
         map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals.", 0010, true));
         map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true));
         map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. It would be easy to get lost here if you went off the pathway… Who knows what creatures await here…!", 1000, true));
@@ -47,6 +47,7 @@ public class Game {
     }
 
     // game loop
+    @SuppressWarnings("unlikely-arg-type")
     public static void main(String[] args) {
             // Initializing the game 
             Game game = new Game();
@@ -55,7 +56,7 @@ public class Game {
             String currentLocationName = Player.getLocation();
             Location currentLocation = null;
 
-            for (Location location : game.map) {
+            for (Location location : Game.map) {
                 if (location.getName().equalsIgnoreCase("Tavern")) {
                     currentLocation = location;
                     break;
@@ -76,7 +77,7 @@ public class Game {
                  // Checks if player wants to examine a location
                 } else if (userChoice.contains("look") || userChoice.contains("around")) {
                     String description = "";
-                    for (Location location: game.map) {
+                    for (Location location: Game.map) {
                         if (location.getName().equalsIgnoreCase(currentLocationName)) {
                             description = currentLocation.getDescription();
                             System.out.println("You are at the " + location.getName() + ". " + description);
@@ -145,7 +146,7 @@ public class Game {
                 // Case if the player wants to talk with an NPC
                 } else if (userChoice.contains("talk")) {
                     // Call on dialogue.java class to run code 
-                    System.out.println("dialogue() would run here");
+                    NPC.talkToUser();
                 
                 // Case if the player wants to look at an object
                 } else if (userChoice.contains("examine")) {
@@ -168,6 +169,7 @@ public class Game {
                 } else if (userChoice.contains("grab")) {
                     System.out.println("What would you like to grab?");
                     String grabItemName = userInput.nextLine().toLowerCase();
+                    // maybe make this a global list of all items...?
                     for (Item item : Player.itemsList) {
                         if (item.getName().equalsIgnoreCase(grabItemName)) {
                             Player.grab(item.getName());
