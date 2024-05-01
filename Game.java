@@ -136,6 +136,7 @@ public class Game {
                         System.out.println("\n*********");
                         System.out.println("ITEMS FOR SALE: ");
                         boolean itemSold = false; 
+                        // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
                         for (Item item : Player.itemsList) { 
                             if (item.getsellableItem()) {
                                 System.out.println("+ " + item);
@@ -180,7 +181,7 @@ public class Game {
                 } 
 
                 // Checks if player wants to travel in a certain direction
-                else if (userChoice.contains("travel") || userChoice.contains("go")) {
+                else if (userChoice.contains("travel") || userChoice.contains("go") || userChoice.contains("enter")) {
                     currentLocation = Player.travel(userChoice);
                     if (currentLocation != null) {
                         currentLocationName = currentLocation.getName();
