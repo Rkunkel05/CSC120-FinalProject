@@ -77,6 +77,14 @@ public class Character {
         return trades;
     }
 
+    public int getWon(){
+        return battlesWon;
+    }
+
+    public int getLost(){
+        return battlesLost;
+    }
+
     /** 
      * @param itemName is the item that is being grabbed
      * Checks if inventory has space (10) and adds item to it. 
@@ -219,5 +227,20 @@ public class Character {
             System.out.println("*********");
             System.out.println("\n");
         }
+    }
+
+    public void Stats() {
+        System.out.println("\n");
+        System.out.println("*********");
+        System.out.println("STATS:");
+        System.out.println("You have: $" + this.getWealth());
+        if (this.type == "friend") {
+            System.out.println("You have made " + this.getfriends() + " amount of friends!");
+        } else if (this.type == "warrior") {
+            System.out.println("You have lost " + this.getLost() + " amount of battles!");
+            System.out.println("You have won " + this.getWon() + " amount of battles!");
+        }
+        System.out.println("*********");
+        System.out.println("\n");
     }
 }

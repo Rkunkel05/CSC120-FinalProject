@@ -265,10 +265,9 @@ public class Game {
                     }
                 }
 
-                // Case if the player wants to check their wealth
-
-                else if (userChoice.contains("wealth")) {
-                    System.out.println("You have: $" + Player.getWealth());
+                // Case if player wants to check overall stats
+                else if (userChoice.contains("stats")) {
+                    Player.Stats();
                 }
                 
                 // Case if the player puts in something the game does not understand
