@@ -1,11 +1,13 @@
 Examine: Study an object
+Fight (character): Fight a character
 Drop: Remove an item from inventory
 Help: Print a menu with all available commands
 Grab: Pick up an item
 Look around: Examine your surroundings
 Sell: Sell items
+Stats: Print player stats
 Talk to (character): Talk with a character
+Trade with (character): Trade with a character
 Travel (direction): Move in a certain direction
 Use: Use an item
 Quit: Exit the game 
-Wealth: Print your wealth

@@ -303,7 +303,6 @@ public class Game {
                     stillPlaying = false;
                     System.out.println("Congrats! You have made " + Player.getfriends() + " friends!");
                 }
-                
 
             } while (stillPlaying);
             typeInput.close();

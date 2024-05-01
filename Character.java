@@ -25,26 +25,26 @@ public class Character {
      */
     public Character(String type) {
         this.itemsList = new ArrayList <>();
-        @SuppressWarnings("unused")
-        Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
+        this.friends = new Hashtable <String, Integer>();
         this.location = 0000;
-        if (type == "merchant"){ 
-            skill = 3;
-            charisma = 5;
-            wealth = 13.00;
-            health = 10;
+        this.type = type;
+        if (this.type.equals("merchant")){ 
+            this.skill = 3;
+            this.charisma = 5;
+            this.wealth = 13.00;
+            this.health = 10;
         }
-        if (type == "warrior"){ 
-            skill = 5;
-            charisma = 3;
-            wealth = 13.00;
-            health = 10;
+        if (this.type.equals("warrior")) { 
+            this.skill = 5;
+            this.charisma = 3;
+            this.wealth = 13.00;
+            this.health = 10;
         }
-        if (type == "friend"){ 
-            skill = 2;
-            charisma = 6;
-            wealth = 13.00;
-            health = 10;
+        if (this.type.equals("friend")){ 
+            this.skill = 2;
+            this.charisma = 6;
+            this.wealth = 13.00;
+            this.health = 10;
         }
     }
 
@@ -234,12 +234,15 @@ public class Character {
         System.out.println("*********");
         System.out.println("STATS:");
         System.out.println("You have: $" + this.getWealth());
-        if (this.type == "friend") {
+        if (this.type.equals("friend")) {
             System.out.println("You have made " + this.getfriends() + " amount of friends!");
-        } else if (this.type == "warrior") {
+        } else if (this.type.equals("warrior")) {
             System.out.println("You have lost " + this.getLost() + " amount of battles!");
             System.out.println("You have won " + this.getWon() + " amount of battles!");
         }
+        System.out.println("Skill: " + this.skill);
+        System.out.println("Charisma: " + this.charisma);
+        System.out.println("Health: " + this.health);
         System.out.println("*********");
         System.out.println("\n");
     }
