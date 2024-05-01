@@ -85,16 +85,20 @@ public class Game {
             Location currentLocation = null;
 
             // Creating NPCs
+            // Tavern NPC
             NPC Trish = new NPC("Trish", 0000);
-            NPC fillerKingdom = new NPC("fillerKingdom", 0010);
-            NPC fillerForest = new NPC("fillerForest", 1000);
-            NPC fillerVillage = new NPC("fillerVillage", 0001);
+            // Kingdom NPC
+            NPC Princess = new NPC("Princess Seraphina", 0010);
+            // Forest NPC
+            NPC Nedali = new NPC("Nedali", 1000);
+            // Village NPC
+            NPC Mei = new NPC("Mei", 0001);
 
             // Creating list of NPCs
             NPCs.add(Trish);
-            NPCs.add(fillerKingdom);
-            NPCs.add(fillerForest);
-            NPCs.add(fillerVillage);
+            NPCs.add(Princess);
+            NPCs.add(Nedali);
+            NPCs.add(Mei);
 
             for (Location location : Game.map) {
                 if (location.getName().equalsIgnoreCase("Tavern")) {
@@ -158,7 +162,6 @@ public class Game {
                     } else {
                         System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
                     }
-                    
 
                     // Quit game
                 } else if (userChoice.equals("quit")) {
@@ -209,13 +212,18 @@ public class Game {
                 // I feel like the logic is flawed here... Do we maybe need a list of all items in the world...?
                 } else if (userChoice.contains("grab")) {
                     System.out.println("What would you like to grab?");
+                    boolean itemFound = false;
                     String grabItemName = userInput.nextLine().toLowerCase();
                     // maybe make this a global list of all items...?
                     for (Item item : Player.itemsList) {
                         if (item.getName().equalsIgnoreCase(grabItemName)) {
                             Player.grab(item.getName());
+                            itemFound = true;
                             break;
                         }
+                    }
+                    if (!itemFound) {
+                        System.out.println("You can't pick up an item that doesn't exist!");
                     }
                 
                 // Case if the player wants to drop an item
@@ -286,8 +294,7 @@ public class Game {
 
             } while (stillPlaying);
             typeInput.close();
-        }
-        
+        }   
 }
 
 

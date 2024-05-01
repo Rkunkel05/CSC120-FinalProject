@@ -25,6 +25,7 @@ public class Character {
      */
     public Character(String type) {
         this.itemsList = new ArrayList <>();
+        @SuppressWarnings("unused")
         Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
         this.location = 0000;
         if (type == "merchant"){ 
@@ -218,12 +219,5 @@ public class Character {
             System.out.println("*********");
             System.out.println("\n");
         }
-    }
-
-    public static void main(String[] args) {
-        Character character = new Character("merchant");
-        System.out.println(character.getLocation());
-        character.travel("north");
-        System.out.println(character.getLocation());
     }
 }
