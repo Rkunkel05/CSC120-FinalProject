@@ -15,11 +15,11 @@ public class Game {
     public void gameCreation() {
         // Creating a map and adding locations to it
         Game.map = new ArrayList < Location > ();
-        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals.", 0010, true));
-        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. This could be a perfect place to set up shop!", 0001, true));
-        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. It would be easy to get lost here if you went off the pathway… Who knows what creatures await here…!", 1000, true));
+        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess, Princess Seraphina! You can... \n + Talk with her \n + Trade with her \n + Fight her", 0010, true));
+        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with her \n + Trade with her \n + Fight her", 0001, true));
+        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature jumps out and stops you! You can... \n + Talk with her \n + Trade with her \n + Fight her", 1000, true));
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
-        Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'. ", 0000, false);
+        Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'.", 0000, false);
         map.add(tavern);
 
         // Creating a list of all NPCs
@@ -70,6 +70,7 @@ public class Game {
             // Initializing the game 
             Game game = new Game();
             game.gameCreation();
+            Fight fight = new Fight();
             
             System.out.println("Please select a character (warrior, merchant, friend)");
             Scanner typeInput = new Scanner(System.in);
@@ -193,6 +194,16 @@ public class Game {
                     // Call on dialogue.java class to run code 
                     NPC.talkToUser(userChoice, Player);
                 
+                }
+                
+                else if (userChoice.contains("fight")) {
+                    NPC.fightDialogue(userChoice, Player);
+                    fight.Fight();
+
+                } else if (userChoice.contains("trade")) {
+                    NPC.tradeDialogue(userChoice, Player);
+                    NPC.tradeObject();
+
                 // Case if the player wants to look at an object
                 } else if (userChoice.contains("examine")) {
                     System.out.println("What would you like to examine?");

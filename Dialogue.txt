@@ -1,3 +1,17 @@
 Trish default: 'Ello travelah! My name is Trish - like fish! - and welcome to my tavern. 
 Trish default: Ah! It looks like you already have some Special items on you. Type "inventory" to view them, they're really quite lovely!
 Trish default: From here, I'd suggest exploring North, East, and West to find new friends! I think those Special items might be key in building up relationships.
+
+Princess default: Don't look so shocked! You're going to alert all of the townspeople that I'm sneaking around again. The castle is so stuffy and I have to sneak out of it sometimes otherwise I think I'd actually lose my mind!
+Princess default: Do you need something from me?
+Princess fight: AHH!!! GUARDS! ANYONE! HELP!!
+Princess trade: Oh! This is so delightful! I've always wanted something like this before!
+
+Nedali default: CAREFUL TRAVELER! These woods are easy to get lost in and there are some terrible, terrible creatures out there - Not me though, I swear!
+Nedali default: I'm just a forest nymph - I love it when travelers like you enter these woods because it's my only glimpse into the outside world... Say... Do you have any items from the outside world that I could have?
+Nedali fight: You chose the wrong forest nymph to mess with!
+Nedali trade: Oh, thank you traveler! I've never seen anything like this, wow! 
+
+Mei default: Welcome to the village, traveler! We're peaceful fisherpeople, just doing what we can to get by in this world.
+Mei fight: What did I do to you?!
+Mei trade: My, oh my, traveler! This is lovely! 

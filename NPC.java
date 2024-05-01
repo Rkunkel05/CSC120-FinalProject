@@ -70,15 +70,64 @@ class NPC {
     System.out.println("That character does not exist or is not in the same location as you are!");
 }
 
+/**
+     * @param userChoice is the input from the player 
+     * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's fight dialogue.
+     */
+    public static void fightDialogue(String userChoice, Character Player) throws FileNotFoundException {
+      for (NPC NPC : Game.NPCs) {
+        String[] words = userChoice.split("\\s+");
+        for (String word : words) {
+          if (word.equalsIgnoreCase(NPC.getName())) {
+            if (Player.getLocation().equals(NPC.getLocation())) {
+              File npcDialogue = new File("Dialogue.txt");
+              Scanner fileReader = new Scanner(npcDialogue);
+              while (fileReader.hasNextLine()) {
+                  String data = fileReader.nextLine();
+                  if (data.contains(NPC.getName()) && data.contains("fight:")) {
+                    System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("fight: ") + "fight: ".length()));
+                  }
+            }
+            fileReader.close();
+            return; 
+          }
+        }
+      }
+    }
+    System.out.println("That character does not exist or is not in the same location as you are!");
+}
+
+/**
+     * @param userChoice is the input from the player 
+     * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's trade dialogue.
+     */
+    public static void tradeDialogue(String userChoice, Character Player) throws FileNotFoundException {
+      for (NPC NPC : Game.NPCs) {
+        String[] words = userChoice.split("\\s+");
+        for (String word : words) {
+          if (word.equalsIgnoreCase(NPC.getName())) {
+            if (Player.getLocation().equals(NPC.getLocation())) {
+              File npcDialogue = new File("Dialogue.txt");
+              Scanner fileReader = new Scanner(npcDialogue);
+              while (fileReader.hasNextLine()) {
+                  String data = fileReader.nextLine();
+                  if (data.contains(NPC.getName()) && data.contains("trade:")) {
+                    System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("trade: ") + "trade: ".length()));
+                  }
+            }
+            fileReader.close();
+            return; 
+          }
+        }
+      }
+    }
+    System.out.println("That character does not exist or is not in the same location as you are!");
+}
+
     public static String tradeObject() {
         private Hashtable<String, Boolean> collection; 
   //collection creates a hashtable to store items in inventory as well as whether or not they are already in inventory
 
-  public static String talkToUser(){
-    System.out.println("Hi! My name is" + name ". What's yours?");
-  //  if (userInput == ){
-   // }
-  }
   public static String tradeObject(){
     //restock, inventory, new arrayList for this class
     // inventory stores certain amount of things 
