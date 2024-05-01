@@ -11,6 +11,7 @@ class NPC {
     String name;
     int location;
     ArrayList < Item > itemsList;
+    private Hashtable<String, Boolean> inventory; 
 
     /**
      * Constructor for NPC
@@ -82,21 +83,21 @@ class NPC {
     //restock, inventory, new arrayList for this class
     // inventory stores certain amount of things 
     public void addItem(String item){
-      this.collection.put(item, true);
+      this.inventory.put(item, true);
 
     }
-     public String removeitem(String item){
-       this.collection.remove(item);
+     public String removeItem(String item){
+       this.inventory.remove(item);
       return item;
 
     } // return the item that we removed
 
     public boolean containsItem(String item){
-      return this.collection.containsKey(item);
+      return this.inventory.containsKey(item);
     }
       // returns true if the title appears as a key in the Libary's collection, false otherwise
     public boolean isAvailable(String item){
-      return this.collection.get(item);
+      return this.inventory.get(item);
     } // returns true if the item is currently in inventory, false otherwise
   
       return "";
