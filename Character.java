@@ -151,9 +151,8 @@ public class Character {
     /**
      * @param item is the item to be used 
      */
-    public void use(String item) {
-        System.out.println("");
-        this.drop(item);
+    public void use(Item item) {
+        System.out.println(item.getAction());
     }
 
     /**

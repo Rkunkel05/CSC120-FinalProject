@@ -238,6 +238,28 @@ public class Game {
                 // Case if the player wants to view their inventory
                 }  else if (userChoice.contains("inventory")) {
                     Player.printInventory();
+
+                // Case if the player wants to use an item
+                } else if (userChoice.contains("use")) {
+                    boolean itemFound = false;
+                    System.out.println("What would you like to use?");
+                    String useItemName = userInput.nextLine().toLowerCase();
+                    for (Item item : Player.itemsList) {
+                        if (item.getName().equalsIgnoreCase(useItemName)) {
+                            Player.use(item);
+                            itemFound = true;
+                            break;
+                        }
+                    }
+                    if (!itemFound) {
+                        System.out.println(useItemName + " is not in your inventory!");
+                    }
+                }
+
+                // Case if the player wants to check their wealth
+
+                else if (userChoice.contains("wealth")) {
+                    System.out.println("You have: $" + Player.getWealth());
                 }
                 
                 // Case if the player puts in something the game does not understand

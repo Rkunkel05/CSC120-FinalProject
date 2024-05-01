@@ -6,4 +6,6 @@ Look around: Examine your surroundings
 Sell: Sell items
 Talk to (character): Talk with a character
 Travel (direction): Move in a certain direction
+Use: Use an item
 Quit: Exit the game 
+Wealth: Print your wealth
