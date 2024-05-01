@@ -9,7 +9,7 @@ public class Fight {
     int npcInt;
     String npcAction;
 
-    public Fight() {
+    public void Fight() {
         fight = true;
         System.out.println("You are fighting " + npc);
         Scanner action = new Scanner(System.in);

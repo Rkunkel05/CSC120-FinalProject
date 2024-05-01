@@ -196,10 +196,12 @@ public class Game {
                 
                 }
                 
+                // Case if the player wants to fight with an NPC
                 else if (userChoice.contains("fight")) {
                     NPC.fightDialogue(userChoice, Player);
                     fight.Fight();
 
+                // Case if the player wants to talk with an NPC
                 } else if (userChoice.contains("trade")) {
                     NPC.tradeDialogue(userChoice, Player);
                     NPC.tradeObject();
