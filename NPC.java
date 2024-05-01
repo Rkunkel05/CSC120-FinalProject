@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Hashtable;
 
 class NPC {
 
@@ -10,6 +11,7 @@ class NPC {
     String name;
     int location;
     ArrayList < Item > itemsList;
+    private Hashtable<String, Boolean> inventory; 
 
     /**
      * Constructor for NPC
@@ -69,8 +71,35 @@ class NPC {
 }
 
     public static String tradeObject() {
+        private Hashtable<String, Boolean> collection; 
+  //collection creates a hashtable to store items in inventory as well as whether or not they are already in inventory
+
+  public static String talkToUser(){
+    System.out.println("Hi! My name is" + name ". What's yours?");
+  //  if (userInput == ){
+   // }
+  }
+  public static String tradeObject(){
+    //restock, inventory, new arrayList for this class
+    // inventory stores certain amount of things 
+    public void addItem(String item){
+      this.inventory.put(item, true);
+
+    }
+     public String removeItem(String item){
+       this.inventory.remove(item);
+      return item;
+
+    } // return the item that we removed
+
+    public boolean containsItem(String item){
+      return this.inventory.containsKey(item);
+    }
+      // returns true if the title appears as a key in the Libary's collection, false otherwise
+    public boolean isAvailable(String item){
+      return this.inventory.get(item);
+    } // returns true if the item is currently in inventory, false otherwise
+  
       return "";
-        //restock, inventory, new arrayList for this class
-        // inventory stores certain amount of things 
     }
 }
