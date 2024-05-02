@@ -159,7 +159,6 @@ public class Game {
                         }
                         if (itemSold) {
                             System.out.println("Sold!");
-                            // You may add logic here to handle profit calculation
                             System.out.println("You made:  $");
                             System.out.println("Current balance: $" + Player.getWealth());
                         }
