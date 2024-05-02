@@ -59,7 +59,7 @@ class NPC {
     }
 
     public int getSkill() {
-      return this.sk
+      return this.skill;
     }
     /**
      * @param userChoice is the input from the player 

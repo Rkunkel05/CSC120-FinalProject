@@ -29,14 +29,12 @@ public class Game {
         Game.worldItems = new ArrayList<Item>();
 
         // Creating items for the game
-        Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for a talented fisher!", "SWISH! Maybe you'll catch a big one!", true, false);
-        Item questItem2 = new Item("Quest Item 2", "[insert description]", "[insert action]", true, false);
-        Item questItem3 = new Item("Quest Item 3", "[insert description]", "[insert action]", true, false);
-        Item questItem4 = new Item("Quest Item 4", "[insert description]", "[insert action]", true, false);
+        Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for someone who likes fishing!", "SWISH! Maybe you'll catch a big one!", true, false);
+        Item RoyalAmulet = new Item("Royal Amulet", "An ancient amulet that shimmers with ancient powers. This gift would be perfect for royalty!", "Holding the amulet in your hand you can feel it hum with energy!", true, false);
+        Item GlowingBlossom = new Item("Glowing Blossom", "A delicate flower that emits a soft, ethereal glow. This gift would be perfect for someone who is connected to nature!", "A soft, etheral glow is emitted, illuminating the surrounding area with magical light", true, false);
         worldItems.add(FishingRod);
-        worldItems.add(questItem2);
-        worldItems.add(questItem3);
-        worldItems.add(questItem4);
+        worldItems.add(RoyalAmulet);
+        worldItems.add(GlowingBlossom);
     }
 
 
@@ -79,9 +77,8 @@ public class Game {
             
             String currentLocationName = Player.getLocation();
             Player.grab("Enchanted Fishing Rod");
-            Player.grab("Quest Item 2");
-            Player.grab("Quest Item 3");
-            Player.grab("Quest Item 4");
+            Player.grab("Royal Amulet");
+            Player.grab("Glowing Blossom");
             Location currentLocation = null;
 
             // Creating NPCs
@@ -246,7 +243,7 @@ public class Game {
                     boolean itemFound = false;
                     String grabItemName = userInput.nextLine().toLowerCase();
                     // maybe make this a global list of all items...?
-                    for (Item item : Player.itemsList) {
+                    for (Item item : Game.worldItems) {
                         if (item.getName().equalsIgnoreCase(grabItemName)) {
                             Player.grab(item.getName());
                             itemFound = true;
