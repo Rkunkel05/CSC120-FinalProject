@@ -37,7 +37,6 @@ public class Game {
         worldItems.add(GlowingBlossom);
     }
 
-
     /**
      * Displays all available actions 
      */
@@ -63,16 +62,25 @@ public class Game {
     }
 
     // game loop
-    @SuppressWarnings("unlikely-arg-type")
     public static void main(String[] args) throws FileNotFoundException {
         // Initializing the game 
         Game game = new Game();
         game.gameCreation();
 
-        System.out.println("Please select a character (warrior, merchant, friend)");
         Scanner typeInput = new Scanner(System.in);
-        String characterType = typeInput.nextLine().toLowerCase();
-        //need exception here to catch user error
+        String characterType;
+        
+        do {
+            System.out.println("Please select a character (warrior, merchant, friend)");
+            characterType = typeInput.nextLine().toLowerCase();
+
+            if (!(characterType.equals("warrior") || characterType.equals("merchant") || characterType.equals("friend"))) {
+                System.out.println("Invalid character type. Please choose from warrior, merchant, or friend.");
+            }
+        } while (!(characterType.equals("warrior") || characterType.equals("merchant") || characterType.equals("friend")));
+
+        // Now characterType contains the valid character type selected by the player
+        System.out.println("You have chosen: " + characterType);
         Character Player = new Character(characterType);
 
         String currentLocationName = Player.getLocation();
@@ -150,6 +158,7 @@ public class Game {
                                 Player.itemsList.remove(item);
                                 itemSold = true;
                                 found = true;
+                                NPC.tradeObject();
                                 break;
                             }
                         }
@@ -158,6 +167,7 @@ public class Game {
                         }
                     }
                     if (itemSold) {
+                        NPC.tradeDialogue(userChoice, Player);
                         System.out.println("Sold!");
                         System.out.println("You made:  $");
                         System.out.println("Current balance: $" + Player.getWealth());
@@ -228,12 +238,6 @@ public class Game {
                 Fight fight = new Fight(Player, npcToFight);
                 NPCs.remove(npcToFight);
 
-
-                // Case if the player wants to trade with an NPC
-            } else if (userChoice.contains("trade")) {
-                NPC.tradeDialogue(userChoice, Player);
-                NPC.tradeObject();
-
                 // Case if the player wants to look at an object
             } else if (userChoice.contains("examine")) {
                 System.out.println("What would you like to examine?");
@@ -256,7 +260,6 @@ public class Game {
                 System.out.println("What would you like to grab?");
                 boolean itemFound = false;
                 String grabItemName = userInput.nextLine().toLowerCase();
-                // maybe make this a global list of all items...?
                 for (Item item: Game.worldItems) {
                     if (item.getName().equalsIgnoreCase(grabItemName)) {
                         Player.grab(item.getName());
@@ -318,16 +321,21 @@ public class Game {
             }
 
             //ends the game if the player has reached the goal assigned to their character type
-            if (characterType == "merchant" && Player.getTrades() > 5 && Player.getWealth() > 100) {
+            // Changing this temporarily for presentation day 
+            // if (characterType == "merchant" && Player.getTrades() > 5 && Player.getWealth() > 100)
+            // System.out.println("Congrats! You have completed " + Player.getTrades() + " trades and made $" + Player.getWealth() + "! \n Excellent work, traveler!");
+            if (characterType.equals("merchant") && Player.getTrades() >= 3) {
                 //character needs accessors for friends hashtable size and for wealth
                 stillPlaying = false;
-                System.out.println("Congrats! You have completed " + Player.getTrades() + " trades and made $" + Player.getWealth() + "!");
-            } else if (characterType == "warrior" && Player.battlesWon >= 5) {
+                System.out.println("Congrats! You have completed " + Player.getTrades() + " trades! \nExcellent work, traveler!");
+            } 
+            // else if (characterType == "warrior" && Player.battlesWon >= 5)
+            else if (characterType.equals("warrior") && Player.battlesWon >= 3) {
                 stillPlaying = false;
-                System.out.println("Congrats! You have won " + Player.battlesWon + " battles!");
-            } else if (characterType == "friend") {
+                System.out.println("Congrats! You have won " + Player.battlesWon + " battles! \nExcellent work, traveler!");
+            } else if (characterType.equals("friend") && Player.getfriends() >= 4) {
                 stillPlaying = false;
-                System.out.println("Congrats! You have made " + Player.getfriends() + " friends!");
+                System.out.println("Congrats! You have made " + Player.getfriends() + " friends! \nExcellent work, traveler!");
             }
 
         } while (stillPlaying);

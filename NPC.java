@@ -79,6 +79,8 @@ class NPC {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("default: ") + "default: ".length()));
                             }
                         }
+                        Player.friends.put(NPC.getName(), 0);
+                        System.out.println("New friend made!");
                         fileReader.close();
                         return;
                     }
@@ -133,6 +135,7 @@ class NPC {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("trade: ") + "trade: ".length()));
                             }
                         }
+                        Player.trades += 1;
                         fileReader.close();
                         return;
                     }

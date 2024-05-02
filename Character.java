@@ -12,7 +12,7 @@ public class Character {
     double wealth;
     int health;
 
-    private Hashtable <String, Integer> friends;
+    public Hashtable <String, Integer> friends;
     //way to store number of trades, either just an increasing int or an arraylist
     int trades;
 
@@ -33,18 +33,25 @@ public class Character {
             this.charisma = 5;
             this.wealth = 13.00;
             this.health = 10;
+            // Temporary holder until we can code wealth + more than 3 trade optiosn
+            System.out.println("Your obejctive is to make 3 trades. Best of luck, traveler!");
+            // System.out.println("Your objective is to make 5 trades and gain 100 wealth. Best of luck, traveler!");
         }
         if (this.type.equals("warrior")) { 
             this.skill = 5;
             this.charisma = 3;
             this.wealth = 13.00;
             this.health = 10;
+            // Temporary holder until we can code more than 5 battles
+            System.out.println("Your objective is to win 3 battles. Best of luck, traveler!");
+            // System.out.println("Your objective is to win 5 battles. Best of luck, traveler!");
         }
         if (this.type.equals("friend")){ 
             this.skill = 2;
             this.charisma = 6;
             this.wealth = 13.00;
             this.health = 10;
+            System.out.println("Your objective is to make 3 friends. Best of luck, traveler!");
         }
     }
 
@@ -73,7 +80,7 @@ public class Character {
         return wealth;
     }
 
-    public double getTrades(){
+    public int getTrades(){
         return trades;
     }
 
@@ -238,12 +245,14 @@ public class Character {
         System.out.println("\n");
         System.out.println("*********");
         System.out.println("STATS:");
-        System.out.println("You have: $" + this.getWealth());
         if (this.type.equals("friend")) {
             System.out.println("You have made " + this.getfriends() + " friends!");
         } else if (this.type.equals("warrior")) {
             System.out.println("You have lost " + this.getLost() + " amount of battles!");
             System.out.println("You have won " + this.getWon() + " amount of battles!");
+        } else {
+            System.out.println("You have: $" + this.getWealth());
+            System.out.println("You have made " + this.getTrades() + " amount of trades!");
         }
         System.out.println("Skill: " + this.skill);
         System.out.println("Charisma: " + this.charisma);
