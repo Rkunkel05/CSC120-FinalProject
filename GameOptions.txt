@@ -1,5 +1,6 @@
-Examine: Study an object
 Drop: Remove an item from inventory
+Examine: Study an object
+Fight (character): Start a fight with a character
 Help: Print a menu with all available commands
 Grab: Pick up an item
 Inventory: Print inventory
@@ -7,6 +8,7 @@ Look around: Examine your surroundings
 Sell: Sell items
 Stats: Print player stats
 Talk to (character): Talk with a character
+Trade with (character): Trade with a character
 Travel (direction): Move in a certain direction
 Use: Use an item
 Quit: Exit the game 
