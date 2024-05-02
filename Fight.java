@@ -100,6 +100,5 @@ public class Fight {
                 System.out.println("OPP STATS\nhealth: " + npcLife + "\nskill: " + npcSkill + "\narmour: " + npcArmour);
             }
         }
-        action.close();
     }
 }

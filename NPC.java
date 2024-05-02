@@ -105,7 +105,6 @@ class NPC {
                             if (data.contains(NPC.getName()) && data.contains("fight:")) {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("fight: ") + "fight: ".length()));
                             }
-                            fileReader.close();
                         }
                         fileReader.close();
                         return;
