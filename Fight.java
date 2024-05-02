@@ -12,6 +12,7 @@ public class Fight {
     int npcArmour;
     int npcSkill;
 
+   
     public Fight(Character player, NPC npc) {
         this.player = player;
         this.npc = npc;
@@ -24,6 +25,7 @@ public class Fight {
         Scanner action = new Scanner(System.in);
         Random random = new Random();
 
+        // Fight loop 
         while (fight) {
             String npcAction;
             System.out.println("You may either block or attack:");

@@ -145,29 +145,51 @@ class NPC {
         System.out.println("That character does not exist or is not in the same location as you are!");
     }
 
+    /**
+     * @return string
+     * Trade an object 
+     */
     public static String tradeObject() {
         Hashtable < String, Boolean > collection;
         return "";
     }
 
     //collection creates a hashtable to store items in inventory as well as whether or not they are already in inventory
-
-    // inventory stores certain amount of things 
+    /**
+     * 
+     * @param item is hte item to be added
+     * Adds an item to the inventory
+     */
     public void addItem(String item) {
         this.inventory.put(item, true);
     }
 
+    /**
+     * 
+     * @param item is the item to be removed
+     * @return item being removed 
+     * Removes an item from the inventory 
+     */
     public String removeItem(String item) {
         this.inventory.remove(item);
         return item;
     } // return the item that we removed
 
+    /**
+     * @param item is the item being checked
+     * @return whether or not the inventory contains the item
+     * Checks whether ot not a given item is in the inventory 
+     */
     public boolean containsItem(String item) {
         return this.inventory.containsKey(item);
     }
 
-    // returns true if the title appears as a key in the Libary's collection, false otherwise
+    /**
+     * @param item is the item being checked
+     * @return whether or not the item is currently in inventory, false otherweise
+     * Checks if an item is available
+     */
     public boolean isAvailable(String item) {
         return this.inventory.get(item);
-    } // returns true if the item is currently in inventory, false otherwise
+    } 
 }

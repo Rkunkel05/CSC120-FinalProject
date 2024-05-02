@@ -21,7 +21,8 @@ public class Character {
     int battlesLost;
 
     /**
-     * Constructor for character
+     * @param type player's class
+     * Constructor for Character
      */
     public Character(String type) {
         this.itemsList = new ArrayList <>();
@@ -166,6 +167,7 @@ public class Character {
 
     /**
      * @param item is the item to be used 
+     * Prints the action associated with the item
      */
     public void use(Item item) {
         System.out.println(item.getAction());
@@ -241,6 +243,9 @@ public class Character {
         }
     }
 
+    /**
+     * Prints the player's inventory in a nicely formatted manner 
+     */
     public void Stats() {
         System.out.println("\n");
         System.out.println("*********");
