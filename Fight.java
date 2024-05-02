@@ -87,7 +87,7 @@ public class Fight {
             else if (startHealth - player.health == 5){
                 player.battlesLost -= 1;
                 fight = false;
-                System.out.println("You were defeated by " + npc.getName() + ":(");
+                System.out.println("Your health is too low to keep fighting! \n You were defeated by " + npc.getName() + ":(");
             }
 
             if (npcLife <= 0) {
