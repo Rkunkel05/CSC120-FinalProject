@@ -6,8 +6,8 @@ public class Game {
 
     public static ArrayList < Location > map;
     static boolean stillPlaying = true;
-    public static ArrayList<NPC> NPCs;
-    public static ArrayList<Item> worldItems;
+    public static ArrayList < NPC > NPCs;
+    public static ArrayList < Item > worldItems;
 
     /**
      * Constructor for map
@@ -23,10 +23,10 @@ public class Game {
         map.add(tavern);
 
         // Creating a list of all NPCs
-        Game.NPCs = new ArrayList<NPC>();
+        Game.NPCs = new ArrayList < NPC > ();
 
         // Creating a list of all world items
-        Game.worldItems = new ArrayList<Item>();
+        Game.worldItems = new ArrayList < Item > ();
 
         // Creating items for the game
         Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for someone who likes fishing!", "SWISH! Maybe you'll catch a big one!", true, true);
@@ -65,277 +65,272 @@ public class Game {
     // game loop
     @SuppressWarnings("unlikely-arg-type")
     public static void main(String[] args) throws FileNotFoundException {
-            // Initializing the game 
-            Game game = new Game();
-            game.gameCreation();
-            
-            System.out.println("Please select a character (warrior, merchant, friend)");
-            Scanner typeInput = new Scanner(System.in);
-            String characterType = typeInput.nextLine().toLowerCase();
-            //need exception here to catch user error
-            Character Player = new Character(characterType);
-            
-            String currentLocationName = Player.getLocation();
-            Player.grab("Enchanted Fishing Rod");
-            Player.grab("Royal Amulet");
-            Player.grab("Glowing Blossom");
-            Location currentLocation = null;
+        // Initializing the game 
+        Game game = new Game();
+        game.gameCreation();
 
-            // Creating NPCs
-            // Tavern NPC
-            NPC Trish = new NPC("Trish", 0000, 10, 10, 10);
-            // Kingdom NPC
-            NPC Princess = new NPC("Princess", 0010, 5, 10, 4);
-            // Forest NPC
-            NPC Nedali = new NPC("Nedali", 1000, 10, 8,6);
-            // Village NPC
-            NPC Mei = new NPC("Mei", 0001, 3, 7,2);
+        System.out.println("Please select a character (warrior, merchant, friend)");
+        Scanner typeInput = new Scanner(System.in);
+        String characterType = typeInput.nextLine().toLowerCase();
+        //need exception here to catch user error
+        Character Player = new Character(characterType);
 
-            // Creating list of NPCs
-            NPCs.add(Trish);
-            NPCs.add(Princess);
-            NPCs.add(Nedali);
-            NPCs.add(Mei);
+        String currentLocationName = Player.getLocation();
+        Player.grab("Enchanted Fishing Rod");
+        Player.grab("Royal Amulet");
+        Player.grab("Glowing Blossom");
+        Location currentLocation = null;
 
-            for (Location location : Game.map) {
-                if (location.getName().equalsIgnoreCase("Tavern")) {
-                    currentLocation = location;
-                    break;
-                }
+        // Creating NPCs
+        // Tavern NPC
+        NPC Trish = new NPC("Trish", 0000, 10, 10, 10);
+        // Kingdom NPC
+        NPC Princess = new NPC("Princess", 0010, 5, 10, 4);
+        // Forest NPC
+        NPC Nedali = new NPC("Nedali", 1000, 10, 8, 6);
+        // Village NPC
+        NPC Mei = new NPC("Mei", 0001, 3, 7, 2);
+
+        // Creating list of NPCs
+        NPCs.add(Trish);
+        NPCs.add(Princess);
+        NPCs.add(Nedali);
+        NPCs.add(Mei);
+
+        for (Location location: Game.map) {
+            if (location.getName().equalsIgnoreCase("Tavern")) {
+                currentLocation = location;
+                break;
             }
+        }
 
-            System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
-            System.out.println("What would you like to do? (for guidance, enter HELP)");
+        System.out.println("You find yourslf outside of a small tavern. A large, oak door remains propped open at the front of the building and you can hear lively chatter and music drifting out from inside.");
+        System.out.println("What would you like to do? (for guidance, enter HELP)");
 
-            do {
-                Scanner userInput = new Scanner(System.in);
-                String userChoice = userInput.nextLine().toLowerCase();
-                          
-                // Checks if player wants the help menu
-                if (userChoice.contains("help")) {
-                    game.showOptions();
-        
-                    // Checks if user wants to examine a location
-                } else if (userChoice.contains("look") || userChoice.contains("around")) {
-                    String description = "";
-                    for (Location location: Game.map) {
-                        if (location.getName().equalsIgnoreCase(currentLocationName)) {
-                            description = currentLocation.getDescription();
-                            System.out.println("You are at the " + location.getName() + ". " + description);
-                            break;
-                        }
+        do {
+            Scanner userInput = new Scanner(System.in);
+            String userChoice = userInput.nextLine().toLowerCase();
+
+            // Checks if player wants the help menu
+            if (userChoice.contains("help")) {
+                game.showOptions();
+
+                // Checks if user wants to examine a location
+            } else if (userChoice.contains("look") || userChoice.contains("around")) {
+                String description = "";
+                for (Location location: Game.map) {
+                    if (location.getName().equalsIgnoreCase(currentLocationName)) {
+                        description = currentLocation.getDescription();
+                        System.out.println("You are at the " + location.getName() + ". " + description);
+                        break;
                     }
-        
+                }
+
                 // Checks if user wants to sell at a location 
-                } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
-                    if (currentLocation.hasTrading()) {
-                        System.out.println("What would you like to trade?"); 
-                        System.out.println("\n*********");
-                        System.out.println("ITEMS FOR SALE: ");
-                        boolean itemSold = false; 
-                        // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
-                        for (Item item : Player.itemsList) { 
-                            if (item.getsellableItem() == true) {
-                                System.out.println("+ " + item.getName());
-                            }
+            } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
+                if (currentLocation.hasTrading()) {
+                    System.out.println("What would you like to trade?");
+                    System.out.println("\n*********");
+                    System.out.println("ITEMS FOR SALE: ");
+                    boolean itemSold = false;
+                    // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
+                    for (Item item: Player.itemsList) {
+                        if (item.getsellableItem() == true) {
+                            System.out.println("+ " + item.getName());
                         }
-                        System.out.println("*********\n");
-                        if (Player.itemsList.isEmpty()) {
-                            System.out.println("You have no items to sell.");
-                        } else {
-                            String sellingItem = userInput.nextLine().toLowerCase();
-                            boolean found = false;
-                            for (Item item : Player.itemsList) {
-                                if (item.getName().equalsIgnoreCase(sellingItem)) {
-                                    Player.itemsList.remove(item);
-                                    itemSold = true;
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            if (!found) {
-                                System.out.println("You don't have that item.");
-                            }
-                        }
-                        if (itemSold) {
-                            System.out.println("Sold!");
-                            System.out.println("You made:  $");
-                            System.out.println("Current balance: $" + Player.getWealth());
-                        }
+                    }
+                    System.out.println("*********\n");
+                    if (Player.itemsList.isEmpty()) {
+                        System.out.println("You have no items to sell.");
                     } else {
-                        System.out.println("You cannot trade here, traveler! Try going to a different location that has a marketplace.");
-                    }
-                }
-
-                    // Quit game
-                else if (userChoice.equals("quit")) {
-                    System.out.println("Are you sure you want to quit? (y/n)");
-                    Scanner confirmInput = new Scanner(System.in);
-                    String confirmChoice = confirmInput.nextLine().toLowerCase();
-                    if (confirmChoice.equals("y") || confirmChoice.equals("yes")) {
-                        System.out.println("Farewell traveler!");
-                        stillPlaying = false;
-                        userInput.close();
-                        confirmInput.close();
-                    }
-                    else {
-                        System.out.println("Returning to the game...");
-                    }
-                } 
-
-                // Checks if player wants to travel in a certain direction
-                else if (userChoice.contains("travel") || userChoice.contains("go") || userChoice.contains("enter")) {
-                    currentLocation = Player.travel(userChoice);
-                    if (currentLocation != null) {
-                        currentLocationName = currentLocation.getName();
-                        System.out.println("You are now at the " + currentLocationName);
-                    }
-        
-                // Case if the player wants to talk with an NPC
-                } else if (userChoice.contains("talk")) {
-                    boolean npcFound = false;
-                    for (NPC npc : Game.NPCs) {
-                        if (npc.getLocation().equalsIgnoreCase(currentLocationName)) {
-                            npcFound = true;
-                            NPC.talkToUser(userChoice, Player);
-                            break;
-                        }
-                    }
-                    if (!npcFound) {
-                        System.out.println("There are no characters to talk to in this location.");
-                    }
-                }
-                
-                // Case if the player wants to fight with an NPC
-                else if (userChoice.contains("fight")) {
-                    String npcName = null;
-                    for (NPC npc : Game.NPCs) {
-                        String[] words = userChoice.split("\\s+");
-                        for (String word : words) {
-                            if (word.equalsIgnoreCase(npc.getName())) {
-                                npcName = npc.getName(); // Assign the NPC's name to npcName
+                        String sellingItem = userInput.nextLine().toLowerCase();
+                        boolean found = false;
+                        for (Item item: Player.itemsList) {
+                            if (item.getName().equalsIgnoreCase(sellingItem)) {
+                                Player.itemsList.remove(item);
+                                itemSold = true;
+                                found = true;
                                 break;
                             }
                         }
+                        if (!found) {
+                            System.out.println("You don't have that item.");
+                        }
                     }
-                    NPC.fightDialogue(userChoice, Player);
-                    NPC npcToFight = null;
-                    for (NPC npc : Game.NPCs) {
-                        if (npc.getName().equalsIgnoreCase(npcName)) {
-                            npcToFight = npc;
+                    if (itemSold) {
+                        System.out.println("Sold!");
+                        System.out.println("You made:  $");
+                        System.out.println("Current balance: $" + Player.getWealth());
+                    }
+                } else {
+                    System.out.println("You cannot trade here, traveler! Try going to a different location that has a marketplace.");
+                }
+            }
+
+            // Quit game
+            else if (userChoice.equals("quit")) {
+                System.out.println("Are you sure you want to quit? (y/n)");
+                Scanner confirmInput = new Scanner(System.in);
+                String confirmChoice = confirmInput.nextLine().toLowerCase();
+                if (confirmChoice.equals("y") || confirmChoice.equals("yes")) {
+                    System.out.println("Farewell traveler!");
+                    stillPlaying = false;
+                    userInput.close();
+                    confirmInput.close();
+                } else {
+                    System.out.println("Returning to the game...");
+                }
+            }
+
+            // Checks if player wants to travel in a certain direction
+            else if (userChoice.contains("travel") || userChoice.contains("go") || userChoice.contains("enter")) {
+                currentLocation = Player.travel(userChoice);
+                if (currentLocation != null) {
+                    currentLocationName = currentLocation.getName();
+                    System.out.println("You are now at the " + currentLocationName);
+                }
+
+                // Case if the player wants to talk with an NPC
+            } else if (userChoice.contains("talk")) {
+                boolean npcFound = false;
+                for (NPC npc: Game.NPCs) {
+                    if (npc.getLocation().equalsIgnoreCase(currentLocationName)) {
+                        npcFound = true;
+                        NPC.talkToUser(userChoice, Player);
+                        break;
+                    }
+                }
+                if (!npcFound) {
+                    System.out.println("There are no characters to talk to in this location.");
+                }
+            }
+
+            // Case if the player wants to fight with an NPC
+            else if (userChoice.contains("fight")) {
+                String npcName = null;
+                for (NPC npc: Game.NPCs) {
+                    String[] words = userChoice.split("\\s+");
+                    for (String word: words) {
+                        if (word.equalsIgnoreCase(npc.getName())) {
+                            npcName = npc.getName(); // Assign the NPC's name to npcName
                             break;
                         }
                     }
-                    Fight fight = new Fight(Player, npcToFight);
-                    NPCs.remove(npcToFight);
+                }
+                NPC.fightDialogue(userChoice, Player);
+                NPC npcToFight = null;
+                for (NPC npc: Game.NPCs) {
+                    if (npc.getName().equalsIgnoreCase(npcName)) {
+                        npcToFight = npc;
+                        break;
+                    }
+                }
+                Fight fight = new Fight(Player, npcToFight);
+                NPCs.remove(npcToFight);
 
 
                 // Case if the player wants to trade with an NPC
-                } else if (userChoice.contains("trade")) {
-                    NPC.tradeDialogue(userChoice, Player);
-                    NPC.tradeObject();
+            } else if (userChoice.contains("trade")) {
+                NPC.tradeDialogue(userChoice, Player);
+                NPC.tradeObject();
 
                 // Case if the player wants to look at an object
-                } else if (userChoice.contains("examine")) {
-                    System.out.println("What would you like to examine?");
-                    String examineItemName = userInput.nextLine().toLowerCase();
-                    boolean itemFound = false;
-                    for (Item item : Player.itemsList) {
-                        if (item.getName().equalsIgnoreCase(examineItemName)) {
-                            System.out.println(item.getDescription());
-                            itemFound = true;
-                            break;
-                        }
+            } else if (userChoice.contains("examine")) {
+                System.out.println("What would you like to examine?");
+                String examineItemName = userInput.nextLine().toLowerCase();
+                boolean itemFound = false;
+                for (Item item: Player.itemsList) {
+                    if (item.getName().equalsIgnoreCase(examineItemName)) {
+                        System.out.println(item.getDescription());
+                        itemFound = true;
+                        break;
                     }
-                    if (!itemFound) {
-                        System.out.println("You don't have that item in your inventory. Try picking it up first to examine it!");
-                    }
+                }
+                if (!itemFound) {
+                    System.out.println("You don't have that item in your inventory. Try picking it up first to examine it!");
+                }
 
                 // Case if the player wants to pick up an item
                 // I feel like the logic is flawed here... Do we maybe need a list of all items in the world...?
-                } else if (userChoice.contains("grab")) {
-                    System.out.println("What would you like to grab?");
-                    boolean itemFound = false;
-                    String grabItemName = userInput.nextLine().toLowerCase();
-                    // maybe make this a global list of all items...?
-                    for (Item item : Game.worldItems) {
-                        if (item.getName().equalsIgnoreCase(grabItemName)) {
-                            Player.grab(item.getName());
-                            itemFound = true;
-                            break;
-                        }
+            } else if (userChoice.contains("grab")) {
+                System.out.println("What would you like to grab?");
+                boolean itemFound = false;
+                String grabItemName = userInput.nextLine().toLowerCase();
+                // maybe make this a global list of all items...?
+                for (Item item: Game.worldItems) {
+                    if (item.getName().equalsIgnoreCase(grabItemName)) {
+                        Player.grab(item.getName());
+                        itemFound = true;
+                        break;
                     }
-                    if (!itemFound) {
-                        System.out.println("You can't pick up an item that doesn't exist!");
-                    }
-                
+                }
+                if (!itemFound) {
+                    System.out.println("You can't pick up an item that doesn't exist!");
+                }
+
                 // Case if the player wants to drop an item
-                } else if (userChoice.contains("drop")) {
-                    System.out.println("What would you like to drop?");
-                    String dropItemName = userInput.nextLine().toLowerCase();
-                    boolean itemFound = false;
-                    for (Item item : Player.itemsList) {
-                        if (item.getName().equalsIgnoreCase(dropItemName)) {
-                            Player.drop(item.getName());
-                            itemFound = true;
-                            break;
-                        }
+            } else if (userChoice.contains("drop")) {
+                System.out.println("What would you like to drop?");
+                String dropItemName = userInput.nextLine().toLowerCase();
+                boolean itemFound = false;
+                for (Item item: Player.itemsList) {
+                    if (item.getName().equalsIgnoreCase(dropItemName)) {
+                        Player.drop(item.getName());
+                        itemFound = true;
+                        break;
                     }
-                    if (!itemFound) {
-                        System.out.println(dropItemName + " is not in your inventory!");
-                    }
+                }
+                if (!itemFound) {
+                    System.out.println(dropItemName + " is not in your inventory!");
+                }
 
 
                 // Case if the player wants to view their inventory
-                }  else if (userChoice.contains("inventory")) {
-                    Player.printInventory();
+            } else if (userChoice.contains("inventory")) {
+                Player.printInventory();
 
                 // Case if the player wants to use an item
-                } else if (userChoice.contains("use")) {
-                    boolean itemFound = false;
-                    System.out.println("What would you like to use?");
-                    String useItemName = userInput.nextLine().toLowerCase();
-                    for (Item item : Player.itemsList) {
-                        if (item.getName().equalsIgnoreCase(useItemName)) {
-                            Player.use(item);
-                            itemFound = true;
-                            break;
-                        }
-                    }
-                    if (!itemFound) {
-                        System.out.println(useItemName + " is not in your inventory!");
+            } else if (userChoice.contains("use")) {
+                boolean itemFound = false;
+                System.out.println("What would you like to use?");
+                String useItemName = userInput.nextLine().toLowerCase();
+                for (Item item: Player.itemsList) {
+                    if (item.getName().equalsIgnoreCase(useItemName)) {
+                        Player.use(item);
+                        itemFound = true;
+                        break;
                     }
                 }
+                if (!itemFound) {
+                    System.out.println(useItemName + " is not in your inventory!");
+                }
+            }
 
-                // Case if player wants to check overall stats
-                else if (userChoice.contains("stats")) {
-                    Player.Stats();
-                }
-                
-                // Case if the player puts in something the game does not understand
-                else {    
-                    System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
-                    stillPlaying = true;
-                }
-                
-                //ends the game if the player has reached the goal assigned to their character type
-                if (characterType == "merchant" && Player.getTrades()>5 && Player.getWealth()>100){
-                    //character needs accessors for friends hashtable size and for wealth
-                    stillPlaying = false;
-                    System.out.println("Congrats! You have completed " + Player.getTrades() + " trades and made $" + Player.getWealth() + "!");
-                }
-                else if (characterType == "warrior" && Player.battlesWon>=5){
-                    stillPlaying = false;
-                    System.out.println("Congrats! You have won " + Player.battlesWon + " battles!");
-                }
-                else if (characterType == "friend"){
-                    stillPlaying = false;
-                    System.out.println("Congrats! You have made " + Player.getfriends() + " friends!");
-                }
+            // Case if player wants to check overall stats
+            else if (userChoice.contains("stats")) {
+                Player.Stats();
+            }
 
-            } while (stillPlaying);
-            typeInput.close();
-        }   
+            // Case if the player puts in something the game does not understand
+            else {
+                System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
+                stillPlaying = true;
+            }
+
+            //ends the game if the player has reached the goal assigned to their character type
+            if (characterType == "merchant" && Player.getTrades() > 5 && Player.getWealth() > 100) {
+                //character needs accessors for friends hashtable size and for wealth
+                stillPlaying = false;
+                System.out.println("Congrats! You have completed " + Player.getTrades() + " trades and made $" + Player.getWealth() + "!");
+            } else if (characterType == "warrior" && Player.battlesWon >= 5) {
+                stillPlaying = false;
+                System.out.println("Congrats! You have won " + Player.battlesWon + " battles!");
+            } else if (characterType == "friend") {
+                stillPlaying = false;
+                System.out.println("Congrats! You have made " + Player.getfriends() + " friends!");
+            }
+
+        } while (stillPlaying);
+        typeInput.close();
+    }
 }
-
-
