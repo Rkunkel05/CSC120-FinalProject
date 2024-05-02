@@ -82,6 +82,7 @@ public class Fight {
 
             if (npcLife <= 0) {
                 System.out.println("You defeated " + npc.getName() + "!");
+                player.battlesWon +=1;
                 fight = false;
             } else {
                 System.out.println("YOUR STATS\nhealth: " + player.health + "\nskill: " + player.skill + "\narmour: " + player.armour);
