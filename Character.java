@@ -235,7 +235,7 @@ public class Character {
         System.out.println("STATS:");
         System.out.println("You have: $" + this.getWealth());
         if (this.type.equals("friend")) {
-            System.out.println("You have made " + this.getfriends() + " amount of friends!");
+            System.out.println("You have made " + this.getfriends() + " friends!");
         } else if (this.type.equals("warrior")) {
             System.out.println("You have lost " + this.getLost() + " amount of battles!");
             System.out.println("You have won " + this.getWon() + " amount of battles!");

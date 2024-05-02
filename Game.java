@@ -15,7 +15,7 @@ public class Game {
     public void gameCreation() {
         // Creating a map and adding locations to it
         Game.map = new ArrayList < Location > ();
-        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess, Princess Seraphina! You can... \n + Talk with her \n + Trade with her \n + Fight her", 0010, true));
+        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess! You can... \n + Talk with her \n + Trade with her \n + Fight her", 0010, true));
         map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with her \n + Trade with her \n + Fight her", 0001, true));
         map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature jumps out and stops you! You can... \n + Talk with her \n + Trade with her \n + Fight her", 1000, true));
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false));
@@ -89,7 +89,7 @@ public class Game {
             // Tavern NPC
             NPC Trish = new NPC("Trish", 0000);
             // Kingdom NPC
-            NPC Princess = new NPC("Princess Seraphina", 0010);
+            NPC Princess = new NPC("Princess", 0010);
             // Forest NPC
             NPC Nedali = new NPC("Nedali", 1000);
             // Village NPC
@@ -201,7 +201,7 @@ public class Game {
                     NPC.fightDialogue(userChoice, Player);
                     fight.Fight();
 
-                // Case if the player wants to talk with an NPC
+                // Case if the player wants to trade with an NPC
                 } else if (userChoice.contains("trade")) {
                     NPC.tradeDialogue(userChoice, Player);
                     NPC.tradeObject();
