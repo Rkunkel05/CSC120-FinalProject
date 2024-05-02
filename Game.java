@@ -29,9 +29,9 @@ public class Game {
         Game.worldItems = new ArrayList<Item>();
 
         // Creating items for the game
-        Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for someone who likes fishing!", "SWISH! Maybe you'll catch a big one!", true, false);
-        Item RoyalAmulet = new Item("Royal Amulet", "An ancient amulet that shimmers with ancient powers. This gift would be perfect for royalty!", "Holding the amulet in your hand you can feel it hum with energy!", true, false);
-        Item GlowingBlossom = new Item("Glowing Blossom", "A delicate flower that emits a soft, ethereal glow. This gift would be perfect for someone who is connected to nature!", "A soft, etheral glow is emitted, illuminating the surrounding area with magical light", true, false);
+        Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for someone who likes fishing!", "SWISH! Maybe you'll catch a big one!", true, true);
+        Item RoyalAmulet = new Item("Royal Amulet", "An ancient amulet that shimmers with ancient powers. This gift would be perfect for royalty!", "Holding the amulet in your hand you can feel it hum with energy!", true, true);
+        Item GlowingBlossom = new Item("Glowing Blossom", "A delicate flower that emits a soft, ethereal glow. This gift would be perfect for someone who is connected to nature!", "A soft, etheral glow is emitted, illuminating the surrounding area with magical light", true, true);
         worldItems.add(FishingRod);
         worldItems.add(RoyalAmulet);
         worldItems.add(GlowingBlossom);
@@ -135,34 +135,41 @@ public class Game {
                         boolean itemSold = false; 
                         // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
                         for (Item item : Player.itemsList) { 
-                            if (item.getsellableItem()) {
-                                System.out.println("+ " + item);
+                            if (item.getsellableItem() == true) {
+                                System.out.println("+ " + item.getName());
                             }
                         }
                         System.out.println("*********\n");
                         if (Player.itemsList.isEmpty()) {
                             System.out.println("You have no items to sell.");
                         } else {
-
                             String sellingItem = userInput.nextLine().toLowerCase();
-                            if (Player.itemsList.contains(sellingItem)) {
-                                System.out.println("Sold!");
-                                Player.itemsList.remove(sellingItem);
-                                itemSold = true;
-                            } else {
+                            boolean found = false;
+                            for (Item item : Player.itemsList) {
+                                if (item.getName().equalsIgnoreCase(sellingItem)) {
+                                    Player.itemsList.remove(item);
+                                    itemSold = true;
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
                                 System.out.println("You don't have that item.");
                             }
                         }
                         if (itemSold) {
-                            System.out.println("You made:  $" + "[insert however we're measuring profit]");
-                            System.out.println("Current balance: $");
+                            System.out.println("Sold!");
+                            // You may add logic here to handle profit calculation
+                            System.out.println("You made:  $");
+                            System.out.println("Current balance: $" + Player.getWealth());
                         }
                     } else {
-                        System.out.println("You cannot trade here traveler! Try going to a different location that has a marketplace.");
+                        System.out.println("You cannot trade here, traveler! Try going to a different location that has a marketplace.");
                     }
+                }
 
                     // Quit game
-                } else if (userChoice.equals("quit")) {
+                else if (userChoice.equals("quit")) {
                     System.out.println("Are you sure you want to quit? (y/n)");
                     Scanner confirmInput = new Scanner(System.in);
                     String confirmChoice = confirmInput.nextLine().toLowerCase();
@@ -187,8 +194,17 @@ public class Game {
         
                 // Case if the player wants to talk with an NPC
                 } else if (userChoice.contains("talk")) {
-                    // Call on dialogue.java class to run code 
-                    NPC.talkToUser(userChoice, Player);
+                    boolean npcFound = false;
+                    for (NPC npc : Game.NPCs) {
+                        if (npc.getLocation().equalsIgnoreCase(currentLocationName)) {
+                            npcFound = true;
+                            NPC.talkToUser(userChoice, Player);
+                            break;
+                        }
+                    }
+                    if (!npcFound) {
+                        System.out.println("There are no characters to talk to in this location.");
+                    }
                 }
                 
                 // Case if the player wants to fight with an NPC
