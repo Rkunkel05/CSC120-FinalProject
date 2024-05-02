@@ -9,28 +9,37 @@ public class Fight {
     int npcInt;
     String npcAction;
     int npcLife;
-    int npcArmour = npc.armour;
+    int npcArmour;
+    int npcSkill;
 
     public Fight(Character player, NPC npc) {
-        fight = true;
-        System.out.println("You are fighting " + npc);
+        this.player = player;
+        this.npc = npc;
+        this.fight = true;
+        this.npcLife = npc.getLife();
+        this.npcArmour = npc.getArmor();
+        this.npcSkill = npc.getSkill();
+        System.out.println("You are fighting " + npc.getName());
+
         Scanner action = new Scanner(System.in);
-        while (fight == true){
+        Random random = new Random();
+
+        while (fight){
+            String npcAction;
             System.out.println("You may either block or attack:");
             String playerAction = action.nextLine().toLowerCase();
             System.out.println("You chose: " + playerAction);
             //randomly picks an action for the npc to take
-            Random Action = new Random();
-            int ncpInt = Action.ints(0,2).findFirst().getAsInt();
+            int ncpInt = random.nextInt(2); 
             if (npcInt == 0) {
-                String npcAction = "attack";
+                npcAction = "attack";
             }
             else {
-                String npcAction = "block";
+                npcAction = "block";
             }
-            System.out.println(npc + " chose: " + npcAction);
+            System.out.println(npc.getName() + " chose: " + npcAction);
             
-            if (playerAction == "attack" && npcAction == "attack"){
+            if (playerAction.equals("attack") && npcAction.equals("attack")){
                 if (player.skill > npc.skill){
                     npcLife -= 2;
                     player.health -= 1;
@@ -45,7 +54,7 @@ public class Fight {
                 }
             }
 
-            if (playerAction == "attack" && npcAction == "block"){
+            if (playerAction.equals("attack") && npcAction.equals("block")){
                 if (player.skill > npcArmour){
                     if (npcArmour >= 2){;
                         npcArmour -=2;
@@ -62,7 +71,7 @@ public class Fight {
                 //if the armour is greater than the skill nothing happens
             }
 
-            if (playerAction == "block" && npcAction == "attack"){
+            if (playerAction.equals("block") && npcAction.equals("attack")){
                 if (npc.skill > player.armour){
                     if (player.armour >= 2){;
                         player.armour -=2;
@@ -79,12 +88,17 @@ public class Fight {
                 //if the armour is greater than the skill nothing happens
                 //if both players pick block nothing happens
             }
-            if (player.health <= 0){
+            if (player.health <= 0) {
                 Game.stillPlaying = false;
+                fight = false;
+            }
 
+            if (npcLife == 0) {
+                System.out.println("You defeated " + npc.getName() + "!");
+                
             }
             System.out.println("YOUR STATS\nhealth: " + player.health + "\nskill: " + player.skill + "\narmour: " + player.armour);
-            System.out.println("OPP STATS\nhealth: " + npcLife + "\nskill: " + npc.skill + "\narmour: " + npc.armour);
+            System.out.println("OPP STATS\nhealth: " + npcLife + "\nskill: " + npc.skill + "\narmour: " + npcArmour);
         }
         action.close();
     }

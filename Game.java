@@ -70,7 +70,6 @@ public class Game {
             // Initializing the game 
             Game game = new Game();
             game.gameCreation();
-            Fight fight = new Fight();
             
             System.out.println("Please select a character (warrior, merchant, friend)");
             Scanner typeInput = new Scanner(System.in);
@@ -87,13 +86,13 @@ public class Game {
 
             // Creating NPCs
             // Tavern NPC
-            NPC Trish = new NPC("Trish", 0000);
+            NPC Trish = new NPC("Trish", 0000, 10, 10, 10);
             // Kingdom NPC
-            NPC Princess = new NPC("Princess", 0010);
+            NPC Princess = new NPC("Princess", 0010, 5, 10, 4);
             // Forest NPC
-            NPC Nedali = new NPC("Nedali", 1000);
+            NPC Nedali = new NPC("Nedali", 1000, 10, 8,6);
             // Village NPC
-            NPC Mei = new NPC("Mei", 0001);
+            NPC Mei = new NPC("Mei", 0001, 3, 7,2);
 
             // Creating list of NPCs
             NPCs.add(Trish);
@@ -193,13 +192,31 @@ public class Game {
                 } else if (userChoice.contains("talk")) {
                     // Call on dialogue.java class to run code 
                     NPC.talkToUser(userChoice, Player);
-                
                 }
                 
                 // Case if the player wants to fight with an NPC
                 else if (userChoice.contains("fight")) {
+                    String npcName = null;
+                    for (NPC npc : Game.NPCs) {
+                        String[] words = userChoice.split("\\s+");
+                        for (String word : words) {
+                            if (word.equalsIgnoreCase(npc.getName())) {
+                                npcName = npc.getName(); // Assign the NPC's name to npcName
+                                break;
+                            }
+                        }
+                    }
                     NPC.fightDialogue(userChoice, Player);
-                    fight.Fight();
+                    NPC npcToFight = null;
+                    for (NPC npc : Game.NPCs) {
+                        if (npc.getName().equalsIgnoreCase(npcName)) {
+                            npcToFight = npc;
+                            break;
+                        }
+                    }
+                    Fight fight = new Fight(Player, npcToFight);
+                    NPCs.remove(npcToFight);
+
 
                 // Case if the player wants to trade with an NPC
                 } else if (userChoice.contains("trade")) {

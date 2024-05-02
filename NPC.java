@@ -9,17 +9,24 @@ class NPC {
     Scanner conversation = new Scanner(System.in);
     String userInput;
     String name;
+    int npcArmour;
+    int npcLife;
     int location;
+    int skill;
     ArrayList<Item> itemsList;
     private Hashtable<String, Boolean> inventory; 
 
     /**
      * Constructor for NPC
      */
-    public NPC(String name, int location) {
+    public NPC(String name, int location, int npcArmor, int npcLife, int skill) {
         this.itemsList = new ArrayList<>();
         this.location = location;
         this.name = name;
+        this.npcArmour = npcArmour;
+        this.npcLife = npcLife;
+        this.skill = skill;
+        
     }
 
     /*
@@ -43,6 +50,17 @@ class NPC {
         }
     }
 
+    public int getArmor() {
+      return this.npcArmour;
+    }
+
+    public int getLife() {
+      return  this.npcLife;
+    }
+
+    public int getSkill() {
+      return this.skill;
+    }
     /**
      * @param userChoice is the input from the player 
      * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's default dialogue.
