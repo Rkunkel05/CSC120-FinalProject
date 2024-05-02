@@ -19,7 +19,7 @@ class NPC {
     /**
      * Constructor for NPC
      */
-    public NPC(String name, int location, int npcArmor, int npcLife, int skill) {
+    public NPC(String name, int location, int npcArmour, int npcLife, int skill) {
         this.itemsList = new ArrayList < > ();
         this.location = location;
         this.name = name;
@@ -50,7 +50,7 @@ class NPC {
         }
     }
 
-    public int getArmor() {
+    public int getArmour() {
         return this.npcArmour;
     }
 
@@ -79,8 +79,6 @@ class NPC {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("default: ") + "default: ".length()));
                             }
                         }
-                        Player.friends.put(NPC.getName(), 0);
-                        System.out.println("New friend made!");
                         fileReader.close();
                         return;
                     }
@@ -107,6 +105,7 @@ class NPC {
                             if (data.contains(NPC.getName()) && data.contains("fight:")) {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("fight: ") + "fight: ".length()));
                             }
+                            fileReader.close();
                         }
                         fileReader.close();
                         return;
@@ -135,7 +134,6 @@ class NPC {
                                 System.out.println(NPC.getName() + ": " + data.substring(data.indexOf("trade: ") + "trade: ".length()));
                             }
                         }
-                        Player.trades += 1;
                         fileReader.close();
                         return;
                     }
