@@ -173,6 +173,7 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 1000) {
                     System.out.println("You travel north.");
+                    this.location = location.location();
                     return location;
                 }
             }
@@ -180,20 +181,23 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 0100) {
                     System.out.println("You travel south.");
+                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("east")) {
             for (Location location : Game.map) {
-                if (location.location() == 0010) {
+                if (location.location() == 0001) {
                     System.out.println("You travel east.");
+                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("west")) {
             for (Location location : Game.map) {
-                if (location.location() == 0001) {
+                if (location.location() == 0010) {
                     System.out.println("You travel west.");
+                    this.location = location.location();
                     return location;
                 }
             }
@@ -201,6 +205,7 @@ public class Character {
         for (Location location : Game.map) {
             if (location.location() == 0000) {
                 System.out.println("You enter the tavern.");
+                this.location = location.location();
                 return location;
             }
         }
