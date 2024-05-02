@@ -11,6 +11,7 @@ public class Fight {
     int npcLife;
     int npcArmour;
     int npcSkill;
+    int startHealth;
 
    
     public Fight(Character player, NPC npc) {
@@ -18,8 +19,10 @@ public class Fight {
         this.npc = npc;
         this.fight = true;
         this.npcLife = npc.getLife();
-        this.npcArmour = npc.getArmor();
+        this.npcArmour = npc.getArmour();
         this.npcSkill = npc.getSkill();
+        this.startHealth = player.health;
+
         System.out.println("You are fighting " + npc.getName());
 
         Scanner action = new Scanner(System.in);
@@ -81,15 +84,22 @@ public class Fight {
                 Game.stillPlaying = false;
                 fight = false;
             }
+            else if (startHealth - player.health == 5){
+                player.battlesLost -= 1;
+                fight = false;
+                System.out.println("You were defeated by " + npc.getName() + ":(");
+            }
 
             if (npcLife <= 0) {
                 System.out.println("You defeated " + npc.getName() + "!");
-                player.battlesWon +=1;
+                player.battlesWon += 1;
                 fight = false;
-            } else {
+            }
+            else {
                 System.out.println("YOUR STATS\nhealth: " + player.health + "\nskill: " + player.skill + "\narmour: " + player.armour);
                 System.out.println("OPP STATS\nhealth: " + npcLife + "\nskill: " + npcSkill + "\narmour: " + npcArmour);
             }
         }
+        action.close();
     }
 }
