@@ -85,7 +85,7 @@ class NPC {
                 }
             }
         }
-        System.out.println("That character does not exist or is not in the same location as you are!");
+        System.out.println("You must specify a character to talk to!");
     }
 
     /**
@@ -93,11 +93,13 @@ class NPC {
      * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's fight dialogue.
      */
     public static void fightDialogue(String userChoice, Character Player) throws FileNotFoundException {
+        boolean npcFound = false; 
         for (NPC NPC: Game.NPCs) {
             String[] words = userChoice.split("\\s+");
             for (String word: words) {
                 if (word.equalsIgnoreCase(NPC.getName())) {
                     if (Player.getLocation().equals(NPC.getLocation())) {
+                        npcFound = true; 
                         File npcDialogue = new File("Dialogue.txt");
                         Scanner fileReader = new Scanner(npcDialogue);
                         while (fileReader.hasNextLine()) {
@@ -112,7 +114,7 @@ class NPC {
                 }
             }
         }
-        System.out.println("That character does not exist or is not in the same location as you are!");
+        System.out.println("You must specify a character to fight with!");
     }
 
     /**
@@ -120,11 +122,13 @@ class NPC {
      * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's trade dialogue.
      */
     public static void tradeDialogue(String userChoice, Character Player) throws FileNotFoundException {
+        boolean npcFound = false; 
         for (NPC NPC: Game.NPCs) {
             String[] words = userChoice.split("\\s+");
             for (String word: words) {
                 if (word.equalsIgnoreCase(NPC.getName())) {
                     if (Player.getLocation().equals(NPC.getLocation())) {
+                        npcFound = true; 
                         File npcDialogue = new File("Dialogue.txt");
                         Scanner fileReader = new Scanner(npcDialogue);
                         while (fileReader.hasNextLine()) {
@@ -139,7 +143,7 @@ class NPC {
                 }
             }
         }
-        System.out.println("That character does not exist or is not in the same location as you are!");
+        System.out.println("You must specify a character to trade with!");
     }
 
     /**

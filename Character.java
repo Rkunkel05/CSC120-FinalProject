@@ -217,6 +217,8 @@ public class Character {
                 this.location = location.location();
                 return location;
             }
+        } else {
+            System.out.println("That is not a valid location! Try again.");
         }
         return null;
     }
