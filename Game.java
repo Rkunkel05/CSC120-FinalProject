@@ -136,44 +136,56 @@ public class Game {
 
                 // Checks if user wants to sell at a location 
             } else if (userChoice.contains("sell") || userChoice.contains("trade")) {
+                boolean npcFound = false;
                 if (currentLocation.hasTrading()) {
-                    System.out.println("What would you like to trade?");
-                    System.out.println("\n*********");
-                    System.out.println("ITEMS FOR SALE: ");
-                    boolean itemSold = false;
-                    // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
-                    for (Item item: Player.itemsList) {
-                        if (item.getsellableItem() == true) {
-                            System.out.println("+ " + item.getName());
-                        }
+                    for (NPC NPC: Game.NPCs) {
+                        String[] words = userChoice.split("\\s+");
+                        for (String word: words) {
+                            if (word.equalsIgnoreCase(NPC.getName())) {
+                                if (Player.getLocation().equals(NPC.getLocation())) {
+                                    npcFound = true;
+                                    System.out.println("What would you like to trade?");
+                                    System.out.println("\n*********");
+                                    System.out.println("ITEMS FOR SALE: ");
+                                    boolean itemSold = false;
+                                    // Maybe add in a check to see if the NPC the player is trading w/ corresponds to the correct quest item if they're trying to give it to them
+                                    for (Item item: Player.itemsList) {
+                                        if (item.getsellableItem() == true) {
+                                            System.out.println("+ " + item.getName());
+                                        }
+                                    }
+                                    System.out.println("*********\n");
+                                    if (Player.itemsList.isEmpty()) {
+                                        System.out.println("You have no items to sell.");
+                                    } else {
+                                        String sellingItem = userInput.nextLine().toLowerCase();
+                                        boolean found = false;
+                                        for (Item item: Player.itemsList) {
+                                            if (item.getName().equalsIgnoreCase(sellingItem)) {
+                                                Player.itemsList.remove(item);
+                                                itemSold = true;
+                                                found = true;
+                                                NPC.tradeObject();
+                                                break;
+                                            }
+                                        }
+                                        if (!found) {
+                                            System.out.println("You don't have that item.");
+                                        }
+                                    }
+                                    if (itemSold) {
+                                        NPC.tradeDialogue(userChoice, Player);
+                                        System.out.println("Sold!");
+                                        System.out.println("You made:  $");
+                                        System.out.println("Current balance: $" + Player.getWealth());
+                                    }
+                                }
+                   
+                            } 
+                        }  
+                    } if (!npcFound) {
+                        System.out.println("You are either not in the same location as that character or need to specify someone to trade with!");
                     }
-                    System.out.println("*********\n");
-                    if (Player.itemsList.isEmpty()) {
-                        System.out.println("You have no items to sell.");
-                    } else {
-                        String sellingItem = userInput.nextLine().toLowerCase();
-                        boolean found = false;
-                        for (Item item: Player.itemsList) {
-                            if (item.getName().equalsIgnoreCase(sellingItem)) {
-                                Player.itemsList.remove(item);
-                                itemSold = true;
-                                found = true;
-                                NPC.tradeObject();
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            System.out.println("You don't have that item.");
-                        }
-                    }
-                    if (itemSold) {
-                        NPC.tradeDialogue(userChoice, Player);
-                        System.out.println("Sold!");
-                        System.out.println("You made:  $");
-                        System.out.println("Current balance: $" + Player.getWealth());
-                    }
-                } else {
-                    System.out.println("You cannot trade here, traveler! Try going to a different location.");
                 }
             }
 
@@ -212,33 +224,31 @@ public class Game {
                     }
                 }
                 if (!npcFound) {
-                    System.out.println("There are no characters to talk to in this location.");
+                    System.out.println("You are either not in the same location as that character or need to specify someone to talk to!");
                 }
             }
 
             // Case if the player wants to fight with an NPC
             else if (userChoice.contains("fight")) {
+                boolean npcFound = false;
                 if (currentLocation.hasFight()) {
                     System.out.println("Which NPC do you want to fight? (Enter the NPC's name)");
                     String npcName = userInput.nextLine().trim().toLowerCase();
                     NPC npcToFight = null;
                     for (NPC npc : Game.NPCs) {
                         if (npc.getLocation().equalsIgnoreCase(currentLocationName) && npc.getName().equalsIgnoreCase(npcName)) {
+                            npcFound = true;
                             npcToFight = npc;
                             break;
                         }
                     }
-                    NPC.fightDialogue(userChoice, Player);
-                    for (NPC npc: Game.NPCs) {
-                        if (npc.getName().equalsIgnoreCase(npcName)) {
-                            npcToFight = npc;
-                            break;
-                        }
+                    if (npcFound) { 
+                        NPC.fightDialogue(userChoice, Player);
+                        Fight fight = new Fight(Player, npcToFight);
+                        NPCs.remove(npcToFight);
+                    } else {
+                        System.out.println("You are either not in the same location as that character or need to specify someone to fight with!");
                     }
-                    Fight fight = new Fight(Player, npcToFight);
-                    NPCs.remove(npcToFight);
-                } else {
-                    System.out.println("You cannot fight here, traveler! Try going to a different location.");
                 }
                 
 
