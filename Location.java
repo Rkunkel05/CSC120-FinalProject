@@ -4,12 +4,12 @@ public class Location extends Base {
         private boolean hasFight;
 
         /**
+         * Constructor 
          * @param Name defines the name of the location
          * @param Description defines a description for the location
          * @param location defines what direction the location is in
          * @param hasTrading indicates whether or not you can trade at this location
          * @param hasFight indicates whether or not you can fight at this location
-         * Constructor 
          */
         public Location(String Name, String Description, int location, boolean hasTrading, boolean hasFight) {
             super (Name, Description);
@@ -20,6 +20,7 @@ public class Location extends Base {
 
         /**
          * Getters
+         * @return requested information
          */
         public int location() {
             return location;
@@ -32,7 +33,8 @@ public class Location extends Base {
         }
 
         /**
-         * Setters
+         * Sets information
+         * @param location
          */
         public void setLocation(int location) {
             this.location = location;

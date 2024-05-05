@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
 public class Character {
     double size;
     int location;
@@ -21,8 +22,8 @@ public class Character {
     int battlesLost;
 
     /**
-     * @param type player's class
      * Constructor for Character
+     * @param type player's class
      */
     public Character(String type) {
         this.itemsList = new ArrayList <>();
@@ -56,8 +57,9 @@ public class Character {
         }
     }
 
-    /** 
+    /**
      * Getters
+     * @return requested information
      */
     public String getLocation() {
         if (this.location == (0000)) {
@@ -94,8 +96,8 @@ public class Character {
     }
 
     /** 
-     * @param itemName is the item that is being grabbed
      * Checks if inventory has space (10) and adds item to it. 
+     * @param itemName is the item that is being grabbed
      */
     public void grab(String itemName) {
         boolean itemFound = false;
@@ -123,8 +125,8 @@ public class Character {
     }
 
     /**
-     * @param itemName is the item that is being dropped
      * Checks if the item is in the inventory and removes it. 
+     * @param itemName is the item that is being dropped
      */
     public void drop(String itemName) {
         Iterator<Item> iterator = itemsList.iterator();
@@ -147,8 +149,8 @@ public class Character {
     }
 
     /**
-     * @param itemName is the item that is being examined 
      * Prints the description of the item 
+     * @param itemName is the item that is being examined 
      */
     public void examine(String itemName) {
         // Check if the item exists in the character's inventory
@@ -166,16 +168,16 @@ public class Character {
     }
 
     /**
-     * @param item is the item to be used 
      * Prints the action associated with the item
+     * @param item is the item to be used 
      */
     public void use(Item item) {
         System.out.println(item.getAction());
     }
 
     /**
-     * @param direction is the direction the player wants to travel in
      * Updates the character's location based on the given direction
+     * @param direction is the direction the player wants to travel in
      */
     public Location travel(String userChoice) {
         if (userChoice.contains("north")) {
@@ -246,7 +248,7 @@ public class Character {
     }
 
     /**
-     * Prints the player's inventory in a nicely formatted manner 
+     * Prints the player's stats
      */
     public void Stats() {
         System.out.println("\n");

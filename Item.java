@@ -11,18 +11,20 @@ public class Item extends Base {
      * @param String d is the description
      * @param String a is the action
      * @param boolean specialItem represents if the item goes to a specific NPC
+     * @param boolean sellableItem represents if the item can be sold
      * @param int price is how much the item is worth
      */
-    public Item(String n, String d, String a, boolean questItem, boolean sellableItem, int price) {
+    public Item(String n, String d, String a, boolean specialItem, boolean sellableItem, int price) {
         super (n, d);
         this.action = a;
-        this.specialItem = questItem;
+        this.specialItem = specialItem;
         this.sellableItem = sellableItem;
         this.price = price;
     }
 
     /**
-     * // Getters
+     * Getters
+     * @return requested information
      */
     public String getAction() {
         return this.action;

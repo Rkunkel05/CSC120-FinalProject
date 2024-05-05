@@ -1,0 +1,5 @@
+Design justification includes a discussion of at least one (reasonable) **alternative design** that could have been used, and the reasons why you decided against this alternative.
+
+**Options to talk about**
+- The map? Deciding to just check for words / numbers versus using guava or an actual map system
+    - Our map isn't particularly large (4 locations that you don't really explore) so it didn't make sense to invest in creating an elaborate map

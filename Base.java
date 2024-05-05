@@ -4,13 +4,19 @@ public class Base {
     private String name;
     private String description;
 
-    // Constructor
+    /**
+     * @param name is the name of the object
+     * @param description is the description of the object
+     */
     public Base(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    // Getters
+    /**
+     * Getters
+     * @return information that was requested
+     */
     public String getName() {
         return name;
     }
@@ -19,11 +25,18 @@ public class Base {
         return description;
     }
 
-    // Setters
+    /**
+     * Sets name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets description
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }

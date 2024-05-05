@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 
 class NPC {
-
     Scanner conversation = new Scanner(System.in);
     String userInput;
     String name;
@@ -18,6 +17,11 @@ class NPC {
 
     /**
      * Constructor for NPC
+     * @param name is the name
+     * @param location is the location
+     * @param npcArmour is the armour stats 
+     * @param npcLife is the health
+     * @param skill is how much skill it has
      */
     public NPC(String name, int location, int npcArmour, int npcLife, int skill) {
         this.itemsList = new ArrayList < > ();
@@ -29,8 +33,9 @@ class NPC {
 
     }
 
-    /*
-     * Getters
+    /**
+     * Getter
+     * @return the requested information
      */
     public String getName() {
         return this.name;
@@ -61,9 +66,11 @@ class NPC {
     public int getSkill() {
         return this.skill;
     }
+
     /**
-     * @param userChoice is the input from the player 
      * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's default dialogue.
+     * @param userChoice is the input from the player 
+     * @param Player is the player's information
      */
     public static void talkToUser(String userChoice, Character Player) throws FileNotFoundException {
         for (NPC NPC: Game.NPCs) {
@@ -89,8 +96,9 @@ class NPC {
     }
 
     /**
-     * @param userChoice is the input from the player 
      * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's fight dialogue.
+     * @param userChoice is the input from the player 
+     * @param Player is the player's information
      */
     public static void fightDialogue(String userChoice, Character Player) throws FileNotFoundException {
         boolean npcFound = false; 
@@ -118,8 +126,9 @@ class NPC {
     }
 
     /**
+     *  Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's trade dialogue.
      * @param userChoice is the input from the player 
-     * Splits the player's input up into a list of words and checks those to see if there is a mention of an NPC. Checks to see if the player is in the same location as the NPC, and if they are, prints out the NPC's trade dialogue.
+     * @param Player is the player's information
      */
     public static void tradeDialogue(String userChoice, Character Player) throws FileNotFoundException {
         boolean npcFound = false; 
@@ -155,21 +164,18 @@ class NPC {
         return "";
     }
 
-    //collection creates a hashtable to store items in inventory as well as whether or not they are already in inventory
-    /**
-     * 
-     * @param item is hte item to be added
-     * Adds an item to the inventory
-     */
+     /**
+      * Adds an item to the inventory
+      * @param item item being added
+      */
     public void addItem(String item) {
         this.inventory.put(item, true);
     }
 
     /**
-     * 
-     * @param item is the item to be removed
-     * @return item being removed 
-     * Removes an item from the inventory 
+     * Removes an item from the inventory
+     * @param item item being removed
+     * @return removed item
      */
     public String removeItem(String item) {
         this.inventory.remove(item);
@@ -177,18 +183,18 @@ class NPC {
     } // return the item that we removed
 
     /**
+     * Checks whether or not a given item is in the inventory 
      * @param item is the item being checked
      * @return whether or not the inventory contains the item
-     * Checks whether ot not a given item is in the inventory 
      */
     public boolean containsItem(String item) {
         return this.inventory.containsKey(item);
     }
 
     /**
+     * Checks if an item is available
      * @param item is the item being checked
      * @return whether or not the item is currently in inventory, false otherweise
-     * Checks if an item is available
      */
     public boolean isAvailable(String item) {
         return this.inventory.get(item);

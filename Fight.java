@@ -13,7 +13,11 @@ public class Fight {
     int npcSkill;
     int startHealth;
 
-   
+   /**
+    * Creates a fight
+    * @param player is the player's information
+    * @param npc is the npc's information
+    */
     public Fight(Character player, NPC npc) {
         this.player = player;
         this.npc = npc;
