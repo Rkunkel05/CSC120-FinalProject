@@ -22,6 +22,7 @@
     We would implement a dice rolling system to add to the Dungeons & Dragons feel of the game. This would influence the effectiveness of a player's action. Additionally, we would add the ability to romance characters rather than only befriending them. 
 
  - What was the most helpful **piece of feedback** you received while working on your project? Who gave it to you?
+    During demo day, someone pointed out to us that they ran into a bug where the game would print "You are either not in the same location as that character or need to specify someone to trade with!" if they attempted to talk / trade / fight with a character without specifying their name first. They suggested that to fix this we should specify in the game options and in the character's dialogue options that the commands to talk / trade / fight have to include the character's name. Unfortunately we do not remember who suggested this. 
 
 
  - If you could go back in time and give your past self some **advice** about this project, what hints would you give?
