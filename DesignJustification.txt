@@ -1,5 +1,3 @@
 Design justification includes a discussion of at least one (reasonable) **alternative design** that could have been used, and the reasons why you decided against this alternative.
 
-**Options to talk about**
-- The map? Deciding to just check for words / numbers versus using guava or an actual map system
-    - Our map isn't particularly large (4 locations that you don't really explore) so it didn't make sense to invest in creating an elaborate map
+    In our project, we resolved to not use Guava or another map system to create a map and instead to check for words / numbers. We did this because our map isn't paricularly large nor is it complex. There are only four locations that offer interactions and not much exploration within them, and no locations are blocked from each other. The player easily can travel from North to East, or East back to the Tavern. As a result of this, we determined that it would be best to take the simplest, more efficient route rather than complicating our map. 
