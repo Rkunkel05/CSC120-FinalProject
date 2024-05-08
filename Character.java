@@ -20,6 +20,8 @@ public class Character {
     ArrayList <Item> itemsList;
     int battlesWon = 0;
     int battlesLost = 0;
+    int food = 0;
+    int bread = 0;
 
     /**
      * Constructor for Character
@@ -195,6 +197,7 @@ public class Character {
                         }
                         else {
                             System.out.println("You caught a fish!");
+                            food += 2;
                         }
                     }
                     else {

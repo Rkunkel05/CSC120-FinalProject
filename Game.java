@@ -333,10 +333,25 @@ public class Game {
             // Case if player wants to check overall stats
             else if (userChoice.contains("stats")) {
                 Player.Stats();
-            }
+
+                // Case if the player wants to eat
+            } else if (userChoice.contains("eat")) {
+                if (Player.health == 10){
+                    System.out.println("Your health is already full!");
+                }
+                else if (Player.food > 0){
+                    Player.food -= 1;
+                    Player.health += 3;
+                    if (Player.health > 10){
+                        Player.health = 10;
+                    }
+                }
+                else {
+                    System.out.println("You have no food to eat!");
+                }
 
             // Case if the player puts in something the game does not understand
-            else {
+            } else {
                 System.out.println("I'm not sure what you mean by that, traveler. Please try again!");
                 stillPlaying = true;
             }
