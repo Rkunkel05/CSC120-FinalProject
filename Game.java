@@ -34,8 +34,8 @@ public class Game {
 
         // Creating items for the game
         Item FishingRod = new Item("Enchanted Fishing Rod", "The fishing rod shimmer with a faint sparkle and seemingly hums with power. This would be a perfect gift for someone who likes fishing!", "SWISH! Maybe you'll catch a big one!", true, true, 10);
-        Item RoyalAmulet = new Item("Royal Amulet", "An ancient amulet that shimmers with ancient powers. This gift would be perfect for royalty!", "Holding the amulet in your hand you can feel it hum with energy!", true, true, 20);
-        Item GlowingBlossom = new Item("Glowing Blossom", "A delicate flower that emits a soft, ethereal glow. This gift would be perfect for someone who is connected to nature!", "A soft, etheral glow is emitted, illuminating the surrounding area with magical light", true, true, 5);
+        Item RoyalAmulet = new Item("Royal Amulet", "An ancient amulet that shimmers with ancient powers. This would be perfect for royalty!", "Holding the amulet in your hand you can feel it hum with energy!", true, true, 20);
+        Item GlowingBlossom = new Item("Glowing Blossom", "A delicate flower that emits a soft, ethereal glow. This would be perfect for someone who is connected to nature!", "A soft, etheral glow is emitted, illuminating the surrounding area with magical light", true, true, 5);
         worldItems.add(FishingRod);
         worldItems.add(RoyalAmulet);
         worldItems.add(GlowingBlossom);
