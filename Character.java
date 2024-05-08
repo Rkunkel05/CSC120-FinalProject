@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
+import java.util.Random;
 
 public class Character {
     double size;
@@ -13,7 +13,7 @@ public class Character {
     double wealth;
     int health;
 
-    public Hashtable <String, Integer> friends;
+    private Hashtable <String, Integer> friends;
     //way to store number of trades, either just an increasing int or an arraylist
     int trades;
 
@@ -26,34 +26,26 @@ public class Character {
      * @param type player's class
      */
     public Character(String type) {
-        this.itemsList = new ArrayList <>();
-        this.friends = new Hashtable <String, Integer>();
+        ArrayList <Item> itemsList = new ArrayList <>();
+        Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
         this.location = 0000;
-        this.type = type;
-        if (this.type.equals("merchant")){ 
-            this.skill = 3;
-            this.charisma = 5;
-            this.wealth = 13.00;
-            this.health = 10;
-            // Temporary holder until we can code wealth + more than 3 trade optiosn
-            System.out.println("Your obejctive is to make 3 trades. Best of luck, traveler!");
-            // System.out.println("Your objective is to make 5 trades and gain 100 wealth. Best of luck, traveler!");
+        if (type == "merchant"){ 
+            skill = 3;
+            charisma = 5;
+            wealth = 13.00;
+            health = 10;
         }
-        if (this.type.equals("warrior")) { 
-            this.skill = 5;
-            this.charisma = 3;
-            this.wealth = 13.00;
-            this.health = 10;
-            // Temporary holder until we can code more than 5 battles
-            System.out.println("Your objective is to win 3 battles. Best of luck, traveler!");
-            // System.out.println("Your objective is to win 5 battles. Best of luck, traveler!");
+        if (type == "warrior"){ 
+            skill = 6;
+            charisma = 2;
+            wealth = 13.00;
+            health = 10;
         }
-        if (this.type.equals("friend")){ 
-            this.skill = 2;
-            this.charisma = 6;
-            this.wealth = 13.00;
-            this.health = 10;
-            System.out.println("Your objective is to make 3 friends. Best of luck, traveler!");
+        if (type == "friend"){ 
+            skill = 2;
+            charisma = 6;
+            wealth = 13.00;
+            health = 10;
         }
     }
 
@@ -78,49 +70,48 @@ public class Character {
     public int getfriends(){
         return friends.size();
     }
-
     public double getWealth(){
         return wealth;
     }
-
-    public int getTrades(){
+    public double getTrades(){
         return trades;
     }
 
-    public int getWon(){
-        return battlesWon;
-    }
-
-    public int getLost(){
-        return battlesLost;
-    }
-
     /** 
-     * Checks if inventory has space (10) and adds item to it. 
+     * Checks if inventory has space (10) and adds item to it. Otherwise throws error 
      * @param itemName is the item that is being grabbed
      */
-    public void grab(String itemName) {
-        boolean itemFound = false;
-        for (Item item : Game.worldItems) {
-            if (item.getName().equalsIgnoreCase(itemName.toLowerCase())) {
-                itemFound = true;
-                if (itemsList.size() < 11) {
-                    if (item.getName().equals("Sword")) {
-                        skill += 4;
-                    }
-                    itemsList.add(item);
-                    if (item.getSpecialItem() == false) {
-                        System.out.println(itemName + " grabbed!");
-                    }
-                    return;
-                } else {
-                    System.out.println("Your inventory is full! Try dropping an item first.");
-                    return;
-                }
+    public void grab(Item item) {
+        if (itemsList.size() <= 9) {
+            System.out.println(item.getName() + " grabbed!");
+            boolean itemAdd = itemsList.add(item);
+            if (item.getName() == "Sword"){
+              skill += 4;
+              System.out.println("Your skill has increased by 4!");
             }
-        }
-        if (!itemFound) {
-            System.out.println("That's not an item!");
+            else if (item.getName() == "Waterbottle"){
+              System.out.println("");
+            }
+            else if (item.getName() == "Helmet"){
+                System.out.println("");
+            }
+            else if (item.getName() == ""){
+            System.out.println("");
+            }
+            else if (item.getName() == ""){
+                System.out.println("");
+            }
+            else if (item.getName() == ""){
+            System.out.println("");
+            }
+            else if (item.getName() == ""){
+                System.out.println("");
+            }
+            else if (item.getName() == ""){
+            System.out.println("");
+            }
+        } else {
+            throw new RuntimeException("Your inventory is full! Try dropping an item first.");
         }
     }
 
@@ -128,24 +119,38 @@ public class Character {
      * Checks if the item is in the inventory and removes it. 
      * @param itemName is the item that is being dropped
      */
-    public void drop(String itemName) {
-        Iterator<Item> iterator = itemsList.iterator();
-        while (iterator.hasNext()) {
-        Item item = iterator.next();
-        if (item.getName().equalsIgnoreCase(itemName)) {
-            if (!item.getSpecialItem()) {
-                iterator.remove(); 
-                System.out.println(itemName + " dropped!");
-                return; 
-            } else {
-                // If the item is special, print an error message and return
-                System.out.println("You can't drop " + itemName + "!");
-                return;
+    public void drop(Item itemName) {
+        for (Item item: itemsList) {
+            if (item.getName().equals(itemName)) {
+                itemsList.remove(item);
+                if (item.getName() == "Sword"){
+                    skill -= 4;
+                    System.out.println("Your skill has decreased by 4 :(");
+                  }
+                  else if (item.getName() == "Waterbottle"){
+                    System.out.println("");
+                  }
+                  else if (item.getName() == "Helmet"){
+                      System.out.println("");
+                  }
+                  else if (item.getName() == ""){
+                  System.out.println("");
+                  }
+                  else if (item.getName() == ""){
+                      System.out.println("");
+                  }
+                  else if (item.getName() == ""){
+                  System.out.println("");
+                  }
+                  else if (item.getName() == ""){
+                      System.out.println("");
+                  }
+                  else if (item.getName() == ""){
+                  System.out.println("");
+                  }
             }
         }
-    }
-        // If the item is not found in the inventory, print an error message
-        System.out.println(itemName + " is not in your inventory!");
+        throw new RuntimeException(itemName + " is not in your inventory!");
     }
 
     /**
@@ -168,11 +173,28 @@ public class Character {
     }
 
     /**
-     * Prints the action associated with the item
      * @param item is the item to be used 
      */
     public void use(Item item) {
-        System.out.println(item.getAction());
+        for (Item itemID: itemsList) {
+            if (itemID.equals(item.getName())) {
+                if (item.getName() == "Enchanted Fishing Rod"){
+                    if (this.getLocation() == "Ocean"){
+                        System.out.println("Fishing.....");
+                        Random random = new Random();
+                        int fish = random.nextInt(4);
+                        if (fish == 3){
+                            System.out.println("You did not catch anything :(");
+                        }
+                        else {
+                            System.out.println("You caught a fish!");
+                            // bruh
+                        }
+                    }
+                }
+            }
+        }
+        this.drop(item);
     }
 
     /**
@@ -184,7 +206,6 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 1000) {
                     System.out.println("You travel north.");
-                    this.location = location.location();
                     return location;
                 }
             }
@@ -192,23 +213,20 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 0100) {
                     System.out.println("You travel south.");
-                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("east")) {
             for (Location location : Game.map) {
-                if (location.location() == 0001) {
+                if (location.location() == 0010) {
                     System.out.println("You travel east.");
-                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("west")) {
             for (Location location : Game.map) {
-                if (location.location() == 0010) {
+                if (location.location() == 0001) {
                     System.out.println("You travel west.");
-                    this.location = location.location();
                     return location;
                 }
             }
@@ -264,9 +282,17 @@ public class Character {
             System.out.println("You have made " + this.getTrades() + " amount of trades!");
         }
         System.out.println("Skill: " + this.skill);
-        System.out.println("Charisma: " + this.charisma);
+        System.out.println("Armour: " + this.armour);
         System.out.println("Health: " + this.health);
-        System.out.println("*********");
-        System.out.println("\n");
+        System.out.println("Wealth: " + this.wealth);
+        System.out.println("Charisma: " + this.charisma);
+
+    }
+
+    public static void main(String[] args) {
+        Character character = new Character("merchant");
+        System.out.println(character.getLocation());
+        character.travel("north");
+        System.out.println(character.getLocation());
     }
 }

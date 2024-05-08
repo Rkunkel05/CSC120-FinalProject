@@ -6,7 +6,7 @@ public class Item extends Base {
     private int price;
     
     /**
-     * Constructor for Item
+     * // Constructor for Item
      * @param String n is the name
      * @param String d is the description
      * @param String a is the action

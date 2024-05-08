@@ -15,9 +15,9 @@ public class Game {
     public void gameCreation() {
         // Creating a map and adding locations to it
         Game.map = new ArrayList < Location > ();
-        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess! You can... \n + Talk with (character) \n + Trade with (character) \n + Fight (character)", 0010, true, true));
-        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with (character) \n + Trade with (character) \n + Fight (character)", 0001, true, true));
-        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature named Nedali jumps out and stops you! You can... \n + Talk with (character) \n + Trade with (character) \n + Fight (character)", 1000, true, true));
+        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess! You can... \n + Talk with her \n + Trade with her \n + Fight her", 0010, true, true));
+        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with her \n + Trade with her \n + Fight her", 0001, true, true));
+        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature named Nedali jumps out and stops you! You can... \n + Talk with her \n + Trade with her \n + Fight her", 1000, true, true));
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false, false));
         Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'.", 0000, false, false);
         map.add(tavern);
@@ -84,9 +84,9 @@ public class Game {
         Character Player = new Character(characterType);
 
         String currentLocationName = Player.getLocation();
-        Player.grab("Enchanted Fishing Rod");
-        Player.grab("Royal Amulet");
-        Player.grab("Glowing Blossom");
+        Player.grab(FishingRod);
+        Player.grab(RoyalAmulet);
+        Player.grab(GlowingBlossom);
         Location currentLocation = null;
 
         // Creating NPCs
@@ -220,7 +220,6 @@ public class Game {
                     if (npc.getLocation().equalsIgnoreCase(currentLocationName)) {
                         npcFound = true;
                         NPC.talkToUser(userChoice, Player);
-                        Player.friends.put(npc.getName(), 0);
                         break;
                     }
                 }
@@ -277,7 +276,7 @@ public class Game {
                 String grabItemName = userInput.nextLine().toLowerCase();
                 for (Item item: Game.worldItems) {
                     if (item.getName().equalsIgnoreCase(grabItemName)) {
-                        Player.grab(item.getName());
+                        Player.grab(item);
                         itemFound = true;
                         break;
                     }
@@ -293,7 +292,7 @@ public class Game {
                 boolean itemFound = false;
                 for (Item item: Player.itemsList) {
                     if (item.getName().equalsIgnoreCase(dropItemName)) {
-                        Player.drop(item.getName());
+                        Player.drop(item);
                         itemFound = true;
                         break;
                     }
