@@ -18,8 +18,8 @@ public class Character {
     int trades;
 
     ArrayList <Item> itemsList;
-    int battlesWon;
-    int battlesLost;
+    int battlesWon = 0;
+    int battlesLost = 0;
 
     /**
      * Constructor for Character
@@ -35,18 +35,19 @@ public class Character {
             wealth = 13.00;
             health = 10;
         }
-        if (type == "warrior"){ 
+        else if (type == "warrior"){ 
             skill = 6;
             charisma = 2;
             wealth = 13.00;
             health = 10;
         }
-        if (type == "friend"){ 
+        else if (type == "friend"){ 
             skill = 2;
             charisma = 6;
             wealth = 13.00;
             health = 10;
         }
+
     }
 
     /**
@@ -75,6 +76,12 @@ public class Character {
     }
     public double getTrades(){
         return trades;
+    }
+    public double getLost(){
+        return battlesLost;
+    }
+    public double getWon(){
+        return battlesWon;
     }
 
     /** 
@@ -177,24 +184,25 @@ public class Character {
      */
     public void use(Item item) {
         for (Item itemID: itemsList) {
-            if (itemID.equals(item.getName())) {
+            if (itemID.equals(item)) {
                 if (item.getName() == "Enchanted Fishing Rod"){
                     if (this.getLocation() == "Ocean"){
                         System.out.println("Fishing.....");
                         Random random = new Random();
                         int fish = random.nextInt(4);
-                        if (fish == 3){
+                        if (fish != 3){
                             System.out.println("You did not catch anything :(");
                         }
                         else {
                             System.out.println("You caught a fish!");
-                            // bruh
                         }
+                    }
+                    else {
+                        System.out.println("You cannot fish unless you are in the ocean!");
                     }
                 }
             }
         }
-        this.drop(item);
     }
 
     /**

@@ -9,6 +9,10 @@ public class Game {
     public static ArrayList < NPC > NPCs;
     public static ArrayList < Item > worldItems;
 
+    Item FishingRod;
+    Item RoyalAmulet;
+    Item GlowingBlossom;
+
     /**
      * Constructor for map
      */
@@ -84,6 +88,9 @@ public class Game {
         Character Player = new Character(characterType);
 
         String currentLocationName = Player.getLocation();
+        Item FishingRod = game.FishingRod;
+        Item RoyalAmulet = game.RoyalAmulet;
+        Item GlowingBlossom = game.GlowingBlossom;
         Player.grab(FishingRod);
         Player.grab(RoyalAmulet);
         Player.grab(GlowingBlossom);
