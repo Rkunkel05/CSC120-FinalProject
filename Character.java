@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Character {
@@ -13,8 +14,7 @@ public class Character {
     double wealth;
     int health;
 
-    private Hashtable <String, Integer> friends;
-    //way to store number of trades, either just an increasing int or an arraylist
+    public Hashtable <String, Integer> friends;
     int trades;
 
     ArrayList <Item> itemsList;
@@ -28,26 +28,31 @@ public class Character {
      * @param type player's class
      */
     public Character(String type) {
-        ArrayList <Item> itemsList = new ArrayList <>();
-        Hashtable <String, Integer> friends = new Hashtable <String, Integer>();
+        this.itemsList = new ArrayList <>();
+        this.friends = new Hashtable <String, Integer>();
         this.location = 0000;
+        this.type = type;
         if (type == "merchant"){ 
-            skill = 3;
-            charisma = 5;
-            wealth = 13.00;
-            health = 10;
+            this.skill = 3;
+            this.charisma = 5;
+            this.wealth = 13.00;
+            this.health = 10;
+            System.out.println("Your obejctive is to make 3 trades. Best of luck, traveler!");
         }
         else if (type == "warrior"){ 
-            skill = 6;
-            charisma = 2;
-            wealth = 13.00;
-            health = 10;
+            this.skill = 5;
+            this.charisma = 3;
+            this.wealth = 13.00;
+            this.health = 10;
+            System.out.println("Your objective is to win 3 battles. Best of luck, traveler!");
+
         }
         else if (type == "friend"){ 
-            skill = 2;
-            charisma = 6;
-            wealth = 13.00;
-            health = 10;
+            this.skill = 2;
+            this.charisma = 6;
+            this.wealth = 13.00;
+            this.health = 10;
+            System.out.println("Your objective is to make 3 friends. Best of luck, traveler!");
         }
 
     }
@@ -90,37 +95,28 @@ public class Character {
      * Checks if inventory has space (10) and adds item to it. Otherwise throws error 
      * @param itemName is the item that is being grabbed
      */
-    public void grab(Item item) {
-        if (itemsList.size() <= 9) {
-            System.out.println(item.getName() + " grabbed!");
-            boolean itemAdd = itemsList.add(item);
-            if (item.getName() == "Sword"){
-              skill += 4;
-              System.out.println("Your skill has increased by 4!");
+    public void grab(String itemName) {
+        boolean itemFound = false;
+        for (Item item : Game.worldItems) {
+            if (item.getName().equalsIgnoreCase(itemName.toLowerCase())) {
+                itemFound = true;
+                if (itemsList.size() < 11) {
+                    if (item.getName().equals("Sword")) {
+                        skill += 4;
+                    }
+                    itemsList.add(item);
+                    if (item.getSpecialItem() == false) {
+                        System.out.println(itemName + " grabbed!");
+                    }
+                    return;
+                } else {
+                    System.out.println("Your inventory is full! Try dropping an item first.");
+                    return;
+                }
             }
-            else if (item.getName() == "Waterbottle"){
-              System.out.println("");
-            }
-            else if (item.getName() == "Helmet"){
-                System.out.println("");
-            }
-            else if (item.getName() == ""){
-            System.out.println("");
-            }
-            else if (item.getName() == ""){
-                System.out.println("");
-            }
-            else if (item.getName() == ""){
-            System.out.println("");
-            }
-            else if (item.getName() == ""){
-                System.out.println("");
-            }
-            else if (item.getName() == ""){
-            System.out.println("");
-            }
-        } else {
-            throw new RuntimeException("Your inventory is full! Try dropping an item first.");
+        }
+        if (!itemFound) {
+            System.out.println("That's not an item!");
         }
     }
 
@@ -128,38 +124,24 @@ public class Character {
      * Checks if the item is in the inventory and removes it. 
      * @param itemName is the item that is being dropped
      */
-    public void drop(Item itemName) {
-        for (Item item: itemsList) {
-            if (item.getName().equals(itemName)) {
-                itemsList.remove(item);
-                if (item.getName() == "Sword"){
-                    skill -= 4;
-                    System.out.println("Your skill has decreased by 4 :(");
-                  }
-                  else if (item.getName() == "Waterbottle"){
-                    System.out.println("");
-                  }
-                  else if (item.getName() == "Helmet"){
-                      System.out.println("");
-                  }
-                  else if (item.getName() == ""){
-                  System.out.println("");
-                  }
-                  else if (item.getName() == ""){
-                      System.out.println("");
-                  }
-                  else if (item.getName() == ""){
-                  System.out.println("");
-                  }
-                  else if (item.getName() == ""){
-                      System.out.println("");
-                  }
-                  else if (item.getName() == ""){
-                  System.out.println("");
-                  }
+    public void drop(String itemName) {
+        Iterator<Item> iterator = itemsList.iterator();
+        while (iterator.hasNext()) {
+        Item item = iterator.next();
+        if (item.getName().equalsIgnoreCase(itemName)) {
+            if (!item.getSpecialItem()) {
+                iterator.remove(); 
+                System.out.println(itemName + " dropped!");
+                return; 
+            } else {
+                // If the item is special, print an error message and return
+                System.out.println("You can't drop " + itemName + "!");
+                return;
             }
         }
-        throw new RuntimeException(itemName + " is not in your inventory!");
+    }
+        // If the item is not found in the inventory, print an error message
+        System.out.println(itemName + " is not in your inventory!");
     }
 
     /**

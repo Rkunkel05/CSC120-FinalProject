@@ -91,9 +91,9 @@ public class Game {
         Item FishingRod = game.FishingRod;
         Item RoyalAmulet = game.RoyalAmulet;
         Item GlowingBlossom = game.GlowingBlossom;
-        Player.grab(FishingRod);
-        Player.grab(RoyalAmulet);
-        Player.grab(GlowingBlossom);
+        Player.grab("Enchanted Fishing Rod");
+        Player.grab("Royal Amulet");
+        Player.grab("Glowing Blossom");
         Location currentLocation = null;
 
         // Creating NPCs
@@ -227,6 +227,7 @@ public class Game {
                     if (npc.getLocation().equalsIgnoreCase(currentLocationName)) {
                         npcFound = true;
                         NPC.talkToUser(userChoice, Player);
+                        Player.friends.put(npc.getName(), 0);
                         break;
                     }
                 }
@@ -252,7 +253,6 @@ public class Game {
                     if (npcFound) { 
                         NPC.fightDialogue(userChoice, Player);
                         Fight fight = new Fight(Player, npcToFight);
-                        NPCs.remove(npcToFight);
                     } else {
                         System.out.println("You are either not in the same location as that character or need to specify someone to fight with!");
                     }
@@ -283,7 +283,7 @@ public class Game {
                 String grabItemName = userInput.nextLine().toLowerCase();
                 for (Item item: Game.worldItems) {
                     if (item.getName().equalsIgnoreCase(grabItemName)) {
-                        Player.grab(item);
+                        Player.grab(item.getName());
                         itemFound = true;
                         break;
                     }
@@ -299,7 +299,7 @@ public class Game {
                 boolean itemFound = false;
                 for (Item item: Player.itemsList) {
                     if (item.getName().equalsIgnoreCase(dropItemName)) {
-                        Player.drop(item);
+                        Player.drop(item.getName());
                         itemFound = true;
                         break;
                     }
