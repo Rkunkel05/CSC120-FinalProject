@@ -6,7 +6,7 @@ import java.util.Random;
 public class Character {
     double size;
     int location;
-    
+
     String type;
     int skill;
     int armour;
@@ -14,10 +14,10 @@ public class Character {
     double wealth;
     int health;
 
-    public Hashtable <String, Integer> friends;
+    public Hashtable < String, Integer > friends;
     int trades;
 
-    ArrayList <Item> itemsList;
+    ArrayList < Item > itemsList;
     int battlesWon = 0;
     int battlesLost = 0;
     int food = 0;
@@ -28,26 +28,24 @@ public class Character {
      * @param type player's class
      */
     public Character(String type) {
-        this.itemsList = new ArrayList <>();
-        this.friends = new Hashtable <String, Integer>();
+        this.itemsList = new ArrayList < > ();
+        this.friends = new Hashtable < String, Integer > ();
         this.location = 0000;
         this.type = type;
-        if (type == "merchant"){ 
+        if (type.equals("merchant")) {
             this.skill = 3;
             this.charisma = 5;
             this.wealth = 13.00;
             this.health = 10;
-            System.out.println("Your obejctive is to make 3 trades. Best of luck, traveler!");
-        }
-        else if (type == "warrior"){ 
+            System.out.println("Your objective is to make 3 trades. Best of luck, traveler!");
+        } else if (type.equals("warrior")) {
             this.skill = 5;
             this.charisma = 3;
             this.wealth = 13.00;
             this.health = 10;
             System.out.println("Your objective is to win 3 battles. Best of luck, traveler!");
-
-        }
-        else if (type == "friend"){ 
+    
+        } else if (type.equals("friend")) {
             this.skill = 2;
             this.charisma = 6;
             this.wealth = 13.00;
@@ -75,20 +73,23 @@ public class Character {
         }
     }
 
-    public int getfriends(){
+    public int getfriends() {
         return friends.size();
     }
-    public double getWealth(){
+    public double getWealth() {
         return wealth;
     }
-    public double getTrades(){
+    public double getTrades() {
         return trades;
     }
-    public double getLost(){
+    public double getLost() {
         return battlesLost;
     }
-    public double getWon(){
+    public double getWon() {
         return battlesWon;
+    }
+    public String getType() {
+        return type;
     }
 
     /** 
@@ -97,7 +98,7 @@ public class Character {
      */
     public void grab(String itemName) {
         boolean itemFound = false;
-        for (Item item : Game.worldItems) {
+        for (Item item: Game.worldItems) {
             if (item.getName().equalsIgnoreCase(itemName.toLowerCase())) {
                 itemFound = true;
                 if (itemsList.size() < 11) {
@@ -125,21 +126,21 @@ public class Character {
      * @param itemName is the item that is being dropped
      */
     public void drop(String itemName) {
-        Iterator<Item> iterator = itemsList.iterator();
+        Iterator < Item > iterator = itemsList.iterator();
         while (iterator.hasNext()) {
-        Item item = iterator.next();
-        if (item.getName().equalsIgnoreCase(itemName)) {
-            if (!item.getSpecialItem()) {
-                iterator.remove(); 
-                System.out.println(itemName + " dropped!");
-                return; 
-            } else {
-                // If the item is special, print an error message and return
-                System.out.println("You can't drop " + itemName + "!");
-                return;
+            Item item = iterator.next();
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                if (!item.getSpecialItem()) {
+                    iterator.remove();
+                    System.out.println(itemName + " dropped!");
+                    return;
+                } else {
+                    // If the item is special, print an error message and return
+                    System.out.println("You can't drop " + itemName + "!");
+                    return;
+                }
             }
         }
-    }
         // If the item is not found in the inventory, print an error message
         System.out.println(itemName + " is not in your inventory!");
     }
@@ -166,25 +167,41 @@ public class Character {
     /**
      * @param item is the item to be used 
      */
-    public void use(Item item) {
+    public void use(Item item, Character Player) {
         for (Item itemID: itemsList) {
             if (itemID.equals(item)) {
-                if (item.getName() == "Enchanted Fishing Rod"){
-                    if (this.getLocation() == "Ocean"){
+                if (item.getName().equalsIgnoreCase("Enchanted Fishing Rod")) {
+                    if (Player.getLocation().equalsIgnoreCase("Ocean")) {
                         System.out.println("Fishing.....");
                         Random random = new Random();
                         int fish = random.nextInt(4);
-                        if (fish != 3){
+                        if (fish != 3) {
                             System.out.println("You did not catch anything :(");
-                        }
-                        else {
+                        } else {
                             System.out.println("You caught a fish!");
                             food += 2;
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("You cannot fish unless you are in the ocean!");
                     }
+                }
+                if (itemID.equals(item)) {
+                    if (item.getName().equalsIgnoreCase("Royal Amulet")) {
+                        System.out.println("The amulet shimmers in your hand and a strange voice whispers guidance in your head");
+                        if (Player.getType().equalsIgnoreCase("merchant")) {
+                            System.out.println("Travel North, South, East, and West to complete four trades!");
+                        } else if (Player.getType().equalsIgnoreCase("friend")) {
+                            System.out.println("Travel North, South, East, and West to talk to and befriend four people!");
+                        } else if (Player.getType().equalsIgnoreCase("warrior")) {
+                            System.out.println("Travel North, South, East, and West to defeat opponents in four battles!");
+                        }
+                    }
+                }
+            }
+            if (itemID.equals(item)) {
+                if (item.getName().equalsIgnoreCase("Glowing Blossom")) {
+                    System.out.println("A magical glow fills the air and you feel a warm sensation as the flower heals you!");
+                    Player.health = 10;
                 }
             }
         }
@@ -199,6 +216,7 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 1000) {
                     System.out.println("You travel north.");
+                    this.location = location.location();
                     return location;
                 }
             }
@@ -206,37 +224,41 @@ public class Character {
             for (Location location : Game.map) {
                 if (location.location() == 0100) {
                     System.out.println("You travel south.");
+                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("east")) {
             for (Location location : Game.map) {
-                if (location.location() == 0010) {
+                if (location.location() == 0001) {
                     System.out.println("You travel east.");
+                    this.location = location.location();
                     return location;
                 }
             }
         } else if (userChoice.contains("west")) {
             for (Location location : Game.map) {
-                if (location.location() == 0001) {
+                if (location.location() == 0010) {
                     System.out.println("You travel west.");
+                    this.location = location.location();
                     return location;
                 }
             }
-        } else if (userChoice.contains("tavern"))
-        for (Location location : Game.map) {
-            if (location.location() == 0000) {
-                System.out.println("You enter the tavern.");
-                this.location = location.location();
-                return location;
+        } else if (userChoice.contains("tavern")) {
+            for (Location location : Game.map) {
+                if (location.location() == 0000) {
+                    System.out.println("You enter the tavern.");
+                    this.location = location.location();
+                    return location;
+                }
             }
         } else {
             System.out.println("That is not a valid location! Try again.");
         }
         return null;
     }
-    
-    
+
+
 
     /**
      * Prints the contents of the inventory

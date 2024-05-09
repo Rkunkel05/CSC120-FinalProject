@@ -85,6 +85,7 @@ public class Fight {
             }
 
             if (player.health <= 0) {
+                System.out.println("You lost the battle! Try again next time.");
                 Game.stillPlaying = false;
                 fight = false;
             }

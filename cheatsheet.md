@@ -22,8 +22,8 @@ Quit: Exit the game
 Tavern: Starting location in the game. 
 North: Forest, the player can trade, fight, or talk to the NPC (Nedali) at this location 
 South: Ocean, there's not much to do at this location other than looking out over the waves. 
-East: Village, the the player can trade, fight, or talk to the NPC (Mei) at this location 
-West: Kingdom, the the player can trade, fight, or talk to the NPC (Princess) at this location 
+East: Kingdom, the the player can trade, fight, or talk to the NPC (Princess) at this location 
+West: Village, the the player can trade, fight, or talk to the NPC (Mei) at this location
 
 All locations can be accessed from each other. (Ex. The player is able to go north, south, east, or back to the tavern from the kingdom)
 

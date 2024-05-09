@@ -238,26 +238,29 @@ public class Game {
 
             // Case if the player wants to fight with an NPC
             else if (userChoice.contains("fight")) {
-                boolean npcFound = false;
                 if (currentLocation.hasFight()) {
                     System.out.println("Which NPC do you want to fight? (Enter the NPC's name)");
                     String npcName = userInput.nextLine().trim().toLowerCase();
                     NPC npcToFight = null;
                     for (NPC npc : Game.NPCs) {
                         if (npc.getLocation().equalsIgnoreCase(currentLocationName) && npc.getName().equalsIgnoreCase(npcName)) {
-                            npcFound = true;
                             npcToFight = npc;
                             break;
                         }
                     }
-                    if (npcFound) { 
-                        NPC.fightDialogue(userChoice, Player);
-                        Fight fight = new Fight(Player, npcToFight);
-                    } else {
-                        System.out.println("You are either not in the same location as that character or need to specify someone to fight with!");
+                    NPC.fightDialogue(userChoice, Player);
+                    for (NPC npc: Game.NPCs) {
+                        if (npc.getName().equalsIgnoreCase(npcName)) {
+                            npcToFight = npc;
+                            break;
+                        }
                     }
+                    Fight fight = new Fight(Player, npcToFight);
+                    NPCs.remove(npcToFight);
+                } else {
+                    System.out.println("You cannot fight here, traveler! Try going to a different location.");
                 }
-                
+     
 
                 // Case if the player wants to look at an object
             } else if (userChoice.contains("examine")) {
@@ -320,7 +323,7 @@ public class Game {
                 String useItemName = userInput.nextLine().toLowerCase();
                 for (Item item: Player.itemsList) {
                     if (item.getName().equalsIgnoreCase(useItemName)) {
-                        Player.use(item);
+                        Player.use(item, Player);
                         itemFound = true;
                         break;
                     }
@@ -340,6 +343,7 @@ public class Game {
                     System.out.println("Your health is already full!");
                 }
                 else if (Player.food > 0){
+                    System.out.println("Your health has been restored!");
                     Player.food -= 1;
                     Player.health += 3;
                     if (Player.health > 10){
@@ -357,15 +361,11 @@ public class Game {
             }
 
             //ends the game if the player has reached the goal assigned to their character type
-            // Changing this temporarily for presentation day 
-            // if (characterType == "merchant" && Player.getTrades() > 5 && Player.getWealth() > 100)
-            // System.out.println("Congrats! You have completed " + Player.getTrades() + " trades and made $" + Player.getWealth() + "! \n Excellent work, traveler!");
+
             if (characterType.equals("merchant") && Player.getTrades() >= 3) {
-                //character needs accessors for friends hashtable size and for wealth
                 stillPlaying = false;
                 System.out.println("Congrats! You have completed " + Player.getTrades() + " trades! \nExcellent work, traveler!");
             } 
-            // else if (characterType == "warrior" && Player.battlesWon >= 5)
             else if (characterType.equals("warrior") && Player.battlesWon >= 3) {
                 stillPlaying = false;
                 System.out.println("Congrats! You have won " + Player.battlesWon + " battles! \nExcellent work, traveler!");
