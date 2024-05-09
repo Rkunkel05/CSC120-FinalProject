@@ -66,10 +66,12 @@ public class Character {
             return "Forest";
         } else if (this.location == (0100)) {
             return "Ocean";
-        } else if (this.location == (0010)) {
+        } else if (this.location == (0001)) {
             return "Village";
-        } else {
+        } else if (this.location == (0010)) {
             return "Kingdom";
+        } else {
+            return "";
         }
     }
 
@@ -200,8 +202,12 @@ public class Character {
             }
             if (itemID.equals(item)) {
                 if (item.getName().equalsIgnoreCase("Glowing Blossom")) {
-                    System.out.println("A magical glow fills the air and you feel a warm sensation as the flower heals you!");
-                    Player.health = 10;
+                    if (Player.health < 10) {
+                        System.out.println("A magical glow fills the air and you feel a warm sensation as the flower heals you!");
+                        Player.health = 10;
+                    } else {
+                        System.out.println("Your health is already full!");
+                    }
                 }
             }
         }

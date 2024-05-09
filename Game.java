@@ -19,9 +19,9 @@ public class Game {
     public void gameCreation() {
         // Creating a map and adding locations to it
         Game.map = new ArrayList < Location > ();
-        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess! You can... \n + Talk with her \n + Trade with her \n + Fight her", 0010, true, true));
-        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with her \n + Trade with her \n + Fight her", 0001, true, true));
-        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature named Nedali jumps out and stops you! You can... \n + Talk with her \n + Trade with her \n + Fight her", 1000, true, true));
+        map.add(new Location("Kingdom", "The kingdom is a busy, large city with ancient and elegant architecture. Bright banners are draped from the large castle in the center. You can see a bustling marketplace filled with stalls and merchants shouting deals. However, before you can enter far into the city, a woman stumbles into you! You don't need to look closely to recognize her as the kingdom's princess! You can... \n + Talk with Princess \n + Trade with Princess \n + Fight Princess", 0010, true, true));
+        map.add(new Location("Village", "The village is a cozy, port-side town. Children run around the cobblestone streets, weaving through stalls packed with goods ranging from fish to exotic fur pelts. A woman with a basket on her hip approaches you with a smile and introduces herself as Mei. You can... \n + Talk with Mei \n + Trade with Mei \n + Fight Mei", 0001, true, true));
+        map.add(new Location("Forest", "The forest is a labyrinth of green foliage, with only a skinny, well-traveled pathway marking where to go. Before you can set off into the forest, a forest creature named Nedali jumps out and stops you! You can... \n + Talk with Nedali \n + Trade with Nedali \n + Fight Nedali", 1000, true, true));
         map.add(new Location("Ocean", "The beach is small and sandy, with waves gently coming in at a low tide. Looking out over the water, you find yourself reminiscing over past adventures taken in distant countries. There is not much else to do here. ", 0100, false, false));
         Location tavern = new Location("Tavern", "The tavern has a boisterous, loud atmosphere and is packed full of locals. A woman at the front counter gives you a smile, and she has a small nametag that reads 'Trish'.", 0000, false, false);
         map.add(tavern);
@@ -242,21 +242,22 @@ public class Game {
                     System.out.println("Which NPC do you want to fight? (Enter the NPC's name)");
                     String npcName = userInput.nextLine().trim().toLowerCase();
                     NPC npcToFight = null;
+                    boolean npcFound = false;
                     for (NPC npc : Game.NPCs) {
+                        System.out.println(npc.getName());
+                        System.out.println(npc.getLocation());
                         if (npc.getLocation().equalsIgnoreCase(currentLocationName) && npc.getName().equalsIgnoreCase(npcName)) {
                             npcToFight = npc;
+                            npcFound = true;
                             break;
                         }
                     }
-                    NPC.fightDialogue(userChoice, Player);
-                    for (NPC npc: Game.NPCs) {
-                        if (npc.getName().equalsIgnoreCase(npcName)) {
-                            npcToFight = npc;
-                            break;
-                        }
+                    if (npcFound) {
+                        NPC.fightDialogue(userChoice, Player);
+                        Fight fight = new Fight(Player, npcToFight);
+                    } else {
+                        System.out.println("You either specified an NPC that does not exist or is not in the same location as you!");
                     }
-                    Fight fight = new Fight(Player, npcToFight);
-                    NPCs.remove(npcToFight);
                 } else {
                     System.out.println("You cannot fight here, traveler! Try going to a different location.");
                 }

@@ -48,10 +48,12 @@ class NPC {
             return "Forest";
         } else if (this.location == 0100) {
             return "Ocean";
-        } else if (this.location == 0010) {
+        } else if (this.location == 0001) {
             return "Village";
-        } else {
+        } else if (this.location == 0010) {
             return "Kingdom";
+        } else {
+            return "";
         }
     }
 
