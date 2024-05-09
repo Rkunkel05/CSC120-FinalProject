@@ -24,7 +24,6 @@
  - What was the most helpful **piece of feedback** you received while working on your project? Who gave it to you?
     During demo day, someone pointed out to us that they ran into a bug where the game would print "You are either not in the same location as that character or need to specify someone to trade with!" if they attempted to talk / trade / fight with a character without specifying their name first. They suggested that to fix this we should specify in the game options and in the character's dialogue options that the commands to talk / trade / fight have to include the character's name. Unfortunately we do not remember who suggested this. 
 
-
  - If you could go back in time and give your past self some **advice** about this project, what hints would you give?
     We would tell our past selves to get started as soon as possible! Especially the days leading up to demo day, we would ourselves extremly crunched with time and wishing that we had started coding more heavily even earlier. That being said, we would also encourage our past selves to make sure that we chunk down the project into manageable amounts and not try to conquer the whole thing in one sitting. 
 
